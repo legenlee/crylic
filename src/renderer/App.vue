@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { ROUTE_NAMES } from './routes';
+import { RouteNames } from './routes';
 </script>
 
 <template>
   <VApp>
     <VNavigationDrawer permanent>
       <VList>
-        <VListItem :to="{ name: ROUTE_NAMES.HOME }">
+        <VListItem :to="{ name: RouteNames.HOME }">
           <VListItemTitle>Home</VListItemTitle>
         </VListItem>
-        <VListItem :to="{ name: ROUTE_NAMES.ABOUT }">
+        <VListItem :to="{ name: RouteNames.ABOUT }">
           <VListItemTitle>About</VListItemTitle>
         </VListItem>
       </VList>

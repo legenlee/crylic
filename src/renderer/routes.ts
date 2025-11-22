@@ -1,17 +1,17 @@
-export const ROUTE_NAMES = {
+export const RouteNames = {
   HOME: "home",
   ABOUT: "about",
-};
+} as const;
 
 export const routes = [
   {
-    name: ROUTE_NAMES.HOME,
+    name: RouteNames.HOME,
     path: "/",
     component: () => import("./views/HomeView.vue"),
   },
   {
-    name: ROUTE_NAMES.ABOUT,
+    name: RouteNames.ABOUT,
     path: "/about",
     component: () => import("./views/AboutView.vue"),
   },
-] as const;
+];
