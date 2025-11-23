@@ -12,6 +12,7 @@ export const routes: RouteRecordRaw[] = [
     path: "/",
     redirect: {
       name: RouteNames.PROFILES,
+      replace: true,
     },
   },
   {
