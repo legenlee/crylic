@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import { RouteNames } from '../routes';
+
+const router = useRouter();
 
 const auth = ref(false);
 </script>
@@ -28,36 +31,13 @@ const auth = ref(false);
           </template>
 
           <VList density="compact">
-            <VListItem title="Sign In" prepend-icon="mdi-login" />
+            <VListItem title="Sign In" prepend-icon="mdi-login" link />
           </VList>
         </VMenu>
         <VListItem link prepend-icon="mdi-cog" />
       </VList>
     </template>
   </VNavigationDrawer>
-
-  <!-- <VAppBar color="transparent" density="compact">
-    <template #append>
-      <VMenu v-if="auth">
-        <template #activator="{ props }">
-          <VBtn icon="mdi-account" v-bind="props" />
-        </template>
-
-        <VList density="compact">
-          <VListItem title="Sign out" prepend-icon="mdi-logout" />
-        </VList>
-      </VMenu>
-      <VMenu v-else>
-        <template #activator="{ props }">
-          <VBtn icon="mdi-account" v-bind="props" />
-        </template>
-
-        <VList density="compact">
-          <VListItem title="Sign In with Microsoft account" prepend-icon="mdi-login" />
-        </VList>
-      </VMenu>
-    </template>
-  </VAppBar> -->
 
   <VMain>
     <slot />
