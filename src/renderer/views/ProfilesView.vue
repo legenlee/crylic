@@ -22,7 +22,7 @@ const dummys = [
   <VContainer fluid>
     <VRow>
       <VCol v-for="dummy in dummys" :key="dummy" cols="3">
-        <VCard variant="tonal" color="primary" :to="{ name: RouteNames.PROFILE_DETAIL, params: { id: dummy } }">
+        <VCard :to="{ name: RouteNames.PROFILE_DETAIL, params: { id: dummy } }" flat>
           <VCardItem>
             <VCardTitle>{{ dummy }}</VCardTitle>
             <VCardSubtitle>1.20.1 (Modded)</VCardSubtitle>
@@ -31,7 +31,7 @@ const dummys = [
           <VCardActions>
             <VSpacer />
             <VBtn icon="mdi-delete" size="small" @click.prevent />
-            <VBtn variant="elevated" text="Launch" append-icon="mdi-launch" @click.prevent />
+            <VBtn variant="elevated" text="Launch" prepend-icon="mdi-launch" @click.prevent />
           </VCardActions>
         </VCard>
       </VCol>
