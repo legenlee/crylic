@@ -1,22 +1,13 @@
 <script setup lang="ts">
-import { RouteNames } from './routes';
+import DefaultLayout from './layouts/DefaultLayout.vue';
+
+
 </script>
 
 <template>
   <VApp>
-    <VNavigationDrawer permanent>
-      <VList>
-        <VListItem :to="{ name: RouteNames.HOME }">
-          <VListItemTitle>Home</VListItemTitle>
-        </VListItem>
-        <VListItem :to="{ name: RouteNames.ABOUT }">
-          <VListItemTitle>About</VListItemTitle>
-        </VListItem>
-      </VList>
-    </VNavigationDrawer>
-
-    <VMain>
+    <DefaultLayout>
       <RouterView />
-    </VMain>
+    </DefaultLayout>
   </VApp>
 </template>

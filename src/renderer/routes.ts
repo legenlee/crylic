@@ -1,17 +1,27 @@
+import { RouteRecordRaw } from "vue-router";
+
 export const RouteNames = {
-  HOME: "home",
-  ABOUT: "about",
+  INIT: "init",
+  PROFILES: "profiles",
+  PROFILE_DETAIL: "profile-detail",
 } as const;
 
-export const routes = [
+export const routes: RouteRecordRaw[] = [
   {
-    name: RouteNames.HOME,
+    name: RouteNames.INIT,
     path: "/",
-    component: () => import("./views/HomeView.vue"),
+    redirect: {
+      name: RouteNames.PROFILES,
+    },
   },
   {
-    name: RouteNames.ABOUT,
-    path: "/about",
-    component: () => import("./views/AboutView.vue"),
+    name: RouteNames.PROFILES,
+    path: "/profiles",
+    component: () => import("./views/ProfilesView.vue"),
+  },
+  {
+    name: RouteNames.PROFILE_DETAIL,
+    path: "/profiles/:id",
+    component: () => import("./views/ProfileDetailView.vue"),
   },
 ];
