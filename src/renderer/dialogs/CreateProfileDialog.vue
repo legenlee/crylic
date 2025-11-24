@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { required } from '../constants/validation';
+import { required } from '../utils/validation';
 
 const currentTab = ref("manual");
 const dialog = ref(false);

@@ -34,16 +34,27 @@ const formattedNow = date.format(new Date(), 'fullDateTime');
       </div>
       <VSpacer />
 
-      <VMenu>
+      <VTooltip text="Open Profile folder">
+        <template #activator="{ props }">
+          <VBtn v-bind="props" icon="mdi-folder-open" variant="text" />
+        </template>
+      </VTooltip>
+
+      <VTooltip text="Delete Profile">
+        <template #activator="{ props }">
+          <VBtn v-bind="props" icon="mdi-delete" color="error" variant="text" />
+        </template>
+      </VTooltip>
+      <!-- <VMenu>
         <template #activator="{ props }">
           <VBtn icon="mdi-dots-vertical" v-bind="props" variant="text" color="medium-emphasis" />
         </template>
 
-        <VList density="compact">
-          <VListItem title="Open Profile Folder" prepend-icon="mdi-folder-open" link />
-          <VListItem class="text-error" title="Delete Profile" prepend-icon="mdi-delete" link />
-        </VList>
-      </VMenu>
+<VList density="compact">
+  <VListItem title="Open Profile Folder" prepend-icon="mdi-folder-open" link />
+  <VListItem class="text-error" title="Delete Profile" prepend-icon="mdi-delete" link />
+</VList>
+</VMenu> -->
 
     </div>
     <VDivider class="my-4" />
