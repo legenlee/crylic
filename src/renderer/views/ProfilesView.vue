@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CreateProfileDialog from '../dialogs/CreateProfileDialog.vue';
 import { RouteNames } from '../routes';
 
 const dummys = [
@@ -25,7 +26,7 @@ const dummys = [
         <VCard :to="{ name: RouteNames.PROFILE_DETAIL, params: { id: dummy } }" flat>
           <VCardItem>
             <VCardTitle>{{ dummy }}</VCardTitle>
-            <VCardSubtitle>1.20.1 (Modded)</VCardSubtitle>
+            <VCardSubtitle>1.20.1</VCardSubtitle>
           </VCardItem>
 
           <VCardActions>
@@ -37,6 +38,11 @@ const dummys = [
       </VCol>
     </VRow>
 
-    <VFab prepend-icon="mdi-plus" text="Create new Profile" app></VFab>
+
+    <CreateProfileDialog>
+      <template #default="{ props }">
+        <VFab v-bind="props" prepend-icon="mdi-plus" text="Create new Profile" app />
+      </template>
+    </CreateProfileDialog>
   </VContainer>
 </template>

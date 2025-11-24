@@ -50,15 +50,30 @@ const formattedNow = date.format(new Date(), 'fullDateTime');
 
     <VRow>
       <VCol cols="4">
-        <VCard title="Worlds" subtitle="0 world(s) created" color="primary" variant="tonal"></VCard>
+        <VCard title="Worlds" subtitle="0 world(s) created" color="primary" variant="tonal">
+          <VCardActions>
+            <VSpacer />
+            <VBtn text="Manage" />
+          </VCardActions>
+        </VCard>
       </VCol>
 
       <VCol cols="4">
-        <VCard title="Resource Packs" subtitle="0 resource pack(s) installed" color="primary" variant="tonal"></VCard>
+        <VCard title="Resource Packs" subtitle="0 resource pack(s) installed" color="primary" variant="tonal">
+          <VCardActions>
+            <VSpacer />
+            <VBtn text="Manage" />
+          </VCardActions>
+        </VCard>
       </VCol>
 
       <VCol cols="4">
-        <VCard title="Screenshots" subtitle="0 screenshot(s) captured" color="primary" variant="tonal"></VCard>
+        <VCard title="Screenshots" subtitle="0 screenshot(s) captured" color="primary" variant="tonal">
+          <VCardActions>
+            <VSpacer />
+            <VBtn text="Manage" />
+          </VCardActions>
+        </VCard>
       </VCol>
     </VRow>
   </VContainer>
