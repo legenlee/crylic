@@ -26,11 +26,16 @@ function create() {
       <VCardText class="d-flex">
         <VRow>
           <VCol cols="6">
-            <VTextField label="Name" density="compact" :rules="[required]" />
+            <VTextField label="Name" density="compact" :rules="[required]" hide-details="auto" />
           </VCol>
 
           <VCol cols="6">
-            <VSelect label="Version" density="compact" :rules="[required]" />
+            <VSelect label="Version" density="compact" :rules="[required]" hide-details="auto" />
+          </VCol>
+
+          <VCol cols="12">
+            <VTextField label="JVM Arguments" density="compact" persistent-hint
+              hint="Do not edit this field if you have no idea what is this thing does." />
           </VCol>
         </VRow>
       </VCardText>
