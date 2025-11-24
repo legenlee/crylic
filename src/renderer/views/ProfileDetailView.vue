@@ -34,6 +34,12 @@ const formattedNow = date.format(new Date(), 'fullDateTime');
       </div>
       <VSpacer />
 
+      <VTooltip text="Edit Profile">
+        <template #activator="{ props }">
+          <VBtn v-bind="props" icon="mdi-pencil" variant="text" />
+        </template>
+      </VTooltip>
+
       <VTooltip text="Open Profile folder">
         <template #activator="{ props }">
           <VBtn v-bind="props" icon="mdi-folder-open" variant="text" />

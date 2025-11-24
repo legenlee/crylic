@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import GridList from '../components/GridList.vue';
 import CreateProfileDialog from '../dialogs/CreateProfileDialog.vue';
 import { RouteNames } from '../routes';
 
@@ -20,8 +21,9 @@ const dummys = [
 </script>
 
 <template>
-  <VContainer fluid>
-    <VRow>
+  <VContainer min-height="100%" fluid>
+    <GridList />
+    <!-- <VRow>
       <VCol v-for="dummy in dummys" :key="dummy" cols="3">
         <VCard :to="{ name: RouteNames.PROFILE_DETAIL, params: { id: dummy } }" flat>
           <VCardItem>
@@ -36,7 +38,7 @@ const dummys = [
           </VCardActions>
         </VCard>
       </VCol>
-    </VRow>
+    </VRow> -->
 
 
     <CreateProfileDialog>
