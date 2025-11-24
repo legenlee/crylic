@@ -9,22 +9,28 @@ const formattedNow = date.format(new Date(), 'fullDateTime');
 </script>
 
 <template>
-  <VContainer fluid>
-    <h1 class="text-h1">{{ params.id }}</h1>
-
-    <VDivider class="my-4" />
-
-    <div class="d-flex align-center ga-4">
+  <VContainer class="pt-8" fluid>
+    <div>
+      <h1>{{ params.id }}</h1>
+      <VChip rounded variant="tonal">1.20.1</VChip>
+    </div>
+    <div class="mt-4 d-flex align-center ga-4">
       <VBtn variant="elevated" size="x-large" prepend-icon="mdi-launch" text="Launch"></VBtn>
       <VDivider vertical />
-      <div class="text-medium-emphasis">
-        <span>Last launched:</span>
-        <div>{{ formattedNow }}</div>
+      <div class="d-flex align-center ga-4 text-medium-emphasis">
+        <VIcon icon="mdi-update" />
+        <div>
+          <div>Last launched:</div>
+          <div>{{ formattedNow }}</div>
+        </div>
       </div>
       <VDivider vertical />
-      <div class="text-medium-emphasis">
-        <span>Total playtime:</span>
-        <div>0 hour(s)</div>
+      <div class="d-flex align-center ga-4 text-medium-emphasis">
+        <VIcon icon="mdi-update" />
+        <div>
+          <div>Total playtime:</div>
+          <div>0 hour(s)</div>
+        </div>
       </div>
       <VSpacer />
 
@@ -43,11 +49,7 @@ const formattedNow = date.format(new Date(), 'fullDateTime');
     <VDivider class="my-4" />
 
     <VRow>
-      <VCol cols="6">
-        <VCard title="Overview" color="primary" variant="tonal"></VCard>
-      </VCol>
-
-      <VCol cols="6">
+      <VCol cols="4">
         <VCard title="Worlds" subtitle="0 world(s) created" color="primary" variant="tonal"></VCard>
       </VCol>
 
@@ -56,11 +58,7 @@ const formattedNow = date.format(new Date(), 'fullDateTime');
       </VCol>
 
       <VCol cols="4">
-        <VCard title="Shader Packs" subtitle="0 shader pack(s) installed" color="primary" variant="tonal"></VCard>
-      </VCol>
-
-      <VCol cols="4">
-        <VCard title="Mods" subtitle="0 mod(s) installed" color="primary" variant="tonal"></VCard>
+        <VCard title="Screenshots" subtitle="0 screenshot(s) captured" color="primary" variant="tonal"></VCard>
       </VCol>
     </VRow>
   </VContainer>
