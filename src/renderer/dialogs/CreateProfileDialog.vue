@@ -58,14 +58,15 @@ function create() {
 
       <VCardActions>
         <VSpacer />
-        <VBtn @click="dialog = false" :disabled="createLoading">Cancel</VBtn>
+        <VBtn :disabled="createLoading" @click="dialog = false"> Cancel </VBtn>
         <VBtn
           variant="elevated"
           prepend-icon="mdi-plus"
           :loading="createLoading"
           @click="create"
-          >Create</VBtn
         >
+          Create
+        </VBtn>
       </VCardActions>
     </VCard>
   </VDialog>

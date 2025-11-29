@@ -1,21 +1,26 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import { useDate } from 'vuetify';
+import { useRoute } from "vue-router";
+import { useDate } from "vuetify";
 
 const { params } = useRoute();
 const date = useDate();
 
-const formattedNow = date.format(new Date(), 'fullDateTime');
+const formattedNow = date.format(new Date(), "fullDateTime");
 </script>
 
 <template>
   <VContainer class="pt-8" fluid>
     <div>
       <h1>{{ params.id }}</h1>
-      <VChip rounded variant="tonal">1.20.1</VChip>
+      <VChip rounded variant="tonal"> 1.20.1 </VChip>
     </div>
     <div class="mt-4 d-flex align-center ga-4">
-      <VBtn variant="elevated" size="x-large" prepend-icon="mdi-launch" text="Launch"></VBtn>
+      <VBtn
+        variant="elevated"
+        size="x-large"
+        prepend-icon="mdi-launch"
+        text="Launch"
+      />
       <VDivider vertical />
       <div class="d-flex align-center ga-4 text-medium-emphasis">
         <VIcon icon="mdi-update" />
@@ -61,13 +66,17 @@ const formattedNow = date.format(new Date(), 'fullDateTime');
   <VListItem class="text-error" title="Delete Profile" prepend-icon="mdi-delete" link />
 </VList>
 </VMenu> -->
-
     </div>
     <VDivider class="my-4" />
 
     <VRow>
       <VCol cols="4">
-        <VCard title="Worlds" subtitle="0 world(s) created" color="primary" variant="tonal">
+        <VCard
+          title="Worlds"
+          subtitle="0 world(s) created"
+          color="primary"
+          variant="tonal"
+        >
           <VCardActions>
             <VSpacer />
             <VBtn text="Manage" />
@@ -76,7 +85,12 @@ const formattedNow = date.format(new Date(), 'fullDateTime');
       </VCol>
 
       <VCol cols="4">
-        <VCard title="Resource Packs" subtitle="0 resource pack(s) installed" color="primary" variant="tonal">
+        <VCard
+          title="Resource Packs"
+          subtitle="0 resource pack(s) installed"
+          color="primary"
+          variant="tonal"
+        >
           <VCardActions>
             <VSpacer />
             <VBtn text="Manage" />
@@ -85,7 +99,12 @@ const formattedNow = date.format(new Date(), 'fullDateTime');
       </VCol>
 
       <VCol cols="4">
-        <VCard title="Screenshots" subtitle="0 screenshot(s) captured" color="primary" variant="tonal">
+        <VCard
+          title="Screenshots"
+          subtitle="0 screenshot(s) captured"
+          color="primary"
+          variant="tonal"
+        >
           <VCardActions>
             <VSpacer />
             <VBtn text="Manage" />

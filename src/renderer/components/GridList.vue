@@ -15,8 +15,14 @@ const props = withDefaults(defineProps<Props>(), {
 <template>
   <template v-if="list.length > 0">
     <VRow>
-      <VCol :cols="props.cols" v-for="item in props.list">
-        <slot :item="item">{{ item.toString() }}</slot>
+      <VCol
+        v-for="item in props.list"
+        :key="item.toString()"
+        :cols="props.cols"
+      >
+        <slot :item="item">
+          {{ item.toString() }}
+        </slot>
       </VCol>
     </VRow>
   </template>
