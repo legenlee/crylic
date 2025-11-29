@@ -1,7 +1,5 @@
 import fs from "fs";
-import path from "path";
 import https, { RequestOptions } from "https";
-import { app } from "electron";
 
 export class ResponseError extends Error {
   public constructor(
