@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { RouteNames } from '../routes';
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { RouteNames } from "../routes";
 
 const router = useRouter();
 
@@ -11,7 +11,11 @@ const auth = ref(false);
 <template>
   <VNavigationDrawer permanent rail color="primary">
     <VList nav density="compact">
-      <VListItem link :to="{ name: RouteNames.PROFILES }" prepend-icon="mdi-apps" />
+      <VListItem
+        link
+        :to="{ name: RouteNames.PROFILES }"
+        prepend-icon="mdi-apps"
+      />
     </VList>
 
     <template #append>

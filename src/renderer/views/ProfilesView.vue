@@ -1,23 +1,6 @@
 <script setup lang="ts">
-import GridList from '../components/GridList.vue';
-import CreateProfileDialog from '../dialogs/CreateProfileDialog.vue';
-import { RouteNames } from '../routes';
-
-const dummys = [
-  "Test 1",
-  "Test 2",
-  "Test 3",
-  "Test 4",
-  "Test 5",
-  "Test 6",
-  "Test 7",
-  "Test 8",
-  "Test 9",
-  "Test 10",
-  "Test 11",
-  "Test 12",
-];
-
+import GridList from "../components/GridList.vue";
+import CreateProfileDialog from "../dialogs/CreateProfileDialog.vue";
 </script>
 
 <template>
@@ -39,12 +22,16 @@ const dummys = [
         </VCard>
       </VCol>
     </VRow> -->
-
-
-    <CreateProfileDialog>
-      <template #default="{ props }">
-        <VFab v-bind="props" prepend-icon="mdi-plus" text="Create new Profile" app />
-      </template>
-    </CreateProfileDialog>
   </VContainer>
+
+  <CreateProfileDialog>
+    <template #default="{ props }">
+      <VFab
+        v-bind="props"
+        prepend-icon="mdi-plus"
+        text="Create new Profile"
+        app
+      />
+    </template>
+  </CreateProfileDialog>
 </template>

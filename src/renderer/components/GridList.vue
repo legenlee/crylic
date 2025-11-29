@@ -2,13 +2,13 @@
 interface Props {
   cols?: number;
   list?: unknown[];
-  emptyText?: string,
-};
+  emptyText?: string;
+}
 
 const props = withDefaults(defineProps<Props>(), {
   cols: 4,
   list: () => [],
-  emptyText: "Data is empty."
+  emptyText: "Data is empty.",
 });
 </script>
 
@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
   </template>
   <template v-else>
     <slot name="empty">
-      <div class="h-100 d-flex align-center items-center">{{ emptyText }}</div>
+      <span>{{ props.emptyText }}</span>
     </slot>
   </template>
 </template>

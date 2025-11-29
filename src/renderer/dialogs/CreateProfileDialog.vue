@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { required } from '../utils/validation';
+import { ref } from "vue";
+import { required } from "../utils/validation";
 
 const currentTab = ref("manual");
 const dialog = ref(false);
@@ -12,7 +12,7 @@ function create() {
   setTimeout(function () {
     createLoading.value = false;
     dialog.value = false;
-  }, 2000)
+  }, 2000);
 }
 </script>
 
@@ -26,16 +26,30 @@ function create() {
       <VCardText class="d-flex">
         <VRow>
           <VCol cols="6">
-            <VTextField label="Name" density="compact" :rules="[required]" hide-details="auto" />
+            <VTextField
+              label="Name"
+              density="compact"
+              :rules="[required]"
+              hide-details="auto"
+            />
           </VCol>
 
           <VCol cols="6">
-            <VSelect label="Version" density="compact" :rules="[required]" hide-details="auto" />
+            <VSelect
+              label="Version"
+              density="compact"
+              :rules="[required]"
+              hide-details="auto"
+            />
           </VCol>
 
           <VCol cols="12">
-            <VTextField label="JVM Arguments" density="compact" persistent-hint
-              hint="Do not edit this field if you have no idea what is this thing does." />
+            <VTextField
+              label="JVM Arguments"
+              density="compact"
+              persistent-hint
+              hint="Do not edit this field if you have no idea what is this thing does."
+            />
           </VCol>
         </VRow>
       </VCardText>
@@ -45,7 +59,13 @@ function create() {
       <VCardActions>
         <VSpacer />
         <VBtn @click="dialog = false" :disabled="createLoading">Cancel</VBtn>
-        <VBtn variant="elevated" prepend-icon="mdi-plus" :loading="createLoading" @click="create">Create</VBtn>
+        <VBtn
+          variant="elevated"
+          prepend-icon="mdi-plus"
+          :loading="createLoading"
+          @click="create"
+          >Create</VBtn
+        >
       </VCardActions>
     </VCard>
   </VDialog>
