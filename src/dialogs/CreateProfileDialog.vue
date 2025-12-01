@@ -6,14 +6,14 @@ const currentTab = ref("manual");
 const dialog = ref(false);
 const createLoading = ref(false);
 
-function create() {
+const create = () => {
   createLoading.value = true;
 
-  setTimeout(function () {
+  setTimeout(() => {
     createLoading.value = false;
     dialog.value = false;
   }, 2000);
-}
+};
 </script>
 
 <template>
