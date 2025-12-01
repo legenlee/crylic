@@ -3,9 +3,25 @@ import path from "path";
 import fs from "fs";
 
 import { Constants } from "../constants";
-import { Client } from "../libs/client";
+import { Client } from "./client";
 
-export class Minecraft {
+type VersionManifest = {
+  latest: {
+    release: string;
+    snapshot: string;
+  };
+  versions: {
+    id: string;
+    type: "release" | "snapshot" | "old_alpha" | "old_beta";
+    url: string;
+    time: string;
+    releaseTime: string;
+    sha1: string;
+    complianceLevel: number;
+  }[];
+};
+
+class Metadata {
   private static readonly _basePath = path.join(
     app.getPath("userData"),
     Constants.METADATA_DIRECTORY,
@@ -30,7 +46,7 @@ export class Minecraft {
     return JSON.parse(
       fs.readFileSync(this._manifestPath, {
         encoding: "utf-8",
-      }),
+      }) ?? "",
     );
   }
 }
