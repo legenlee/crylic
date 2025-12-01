@@ -1,6 +1,6 @@
 {
-  "name": "minecraft-launcher",
-  "productName": "minecraft-launcher",
+  "name": "crylic",
+  "productName": "Crylic",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".vite/build/main.js",
