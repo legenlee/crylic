@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import GridList from "../components/GridList.vue";
+import GridList from "../components/common/GridList.vue";
 import CreateProfileDialog from "../dialogs/CreateProfileDialog.vue";
 </script>
 

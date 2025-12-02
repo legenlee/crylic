@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { IPC_TWO_WAY_CHANNELS } from "./constants";
+import { IPC_TWO_WAY_CHANNELS } from "../constants";
 
 const manifest = {
   getVersions: () =>

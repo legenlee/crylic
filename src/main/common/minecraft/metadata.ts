@@ -6,8 +6,8 @@ import {
   IPC_TWO_WAY_CHANNELS,
   MANIFEST_URL,
   METADATA_DIRECTORY,
-} from "../constants";
-import { request } from "./lib/client";
+} from "../../../constants";
+import { request } from "../../lib/client";
 
 export type VersionManifest = {
   latest: {
