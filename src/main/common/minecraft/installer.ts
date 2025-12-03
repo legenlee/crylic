@@ -3,6 +3,7 @@ import path from "path";
 
 import type { AssetIndex, Version, VersionManifest } from "./types";
 import { request } from "../https";
+import { CURRENT_OS } from "../../constants";
 
 const RESOURCES_URL = "https://resources.download.minecraft.net";
 // const LIBRARIES_URL = "https://libraries.minecraft.net";
@@ -84,17 +85,10 @@ export const install = async (version: Version, basePath: string) => {
       continue;
     }
 
-    const platform =
-      process.platform === "win32"
-        ? "windows"
-        : process.platform === "darwin"
-          ? "osx"
-          : "linux";
-
     if (
       value.rules &&
       value.rules.action === "allow" &&
-      value.rules.os.name !== platform
+      value.rules.os.name !== CURRENT_OS
     ) {
       continue;
     }
@@ -117,7 +111,7 @@ export const install = async (version: Version, basePath: string) => {
   // End of installing libraries
 
   // Start of installing client
-  for (const [key, value] of Object.entries(version.download).filter(([key]) =>
+  for (const [, value] of Object.entries(version.download).filter(([key]) =>
     key.startsWith("client"),
   )) {
     const fileName = value.url.split("/").pop();
