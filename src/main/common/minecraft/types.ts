@@ -14,28 +14,22 @@ export type VersionManifest = {
   }[];
 };
 
+export type Rules = {
+  action: string;
+  features?: Record<string, boolean>;
+  os?: string;
+  arch?: string;
+};
+
+export type Argument = {
+  rules: Rules;
+  value: string | string[];
+};
+
 export type Version = {
   arguments?: {
-    game: (
-      | string
-      | {
-          rules: {
-            action: string;
-            features: Record<string, boolean>;
-          };
-          value: string | string[];
-        }
-    )[];
-    jvm: (
-      | string
-      | {
-          rules: {
-            action: string;
-            os: string;
-          };
-          value: string | string[];
-        }
-    )[];
+    game: (string | Argument)[];
+    jvm: (string | Argument)[];
   };
   assetIndex: {
     id: string;
@@ -69,12 +63,7 @@ export type Version = {
       };
     };
     name: string;
-    rules?: {
-      action: string;
-      os: {
-        name: "windows" | "liunx" | "osx";
-      };
-    };
+    rules?: Rules;
   }[];
   logging?: {
     client: {
@@ -89,7 +78,7 @@ export type Version = {
     };
   };
   mainClass: string;
-  minecraftArguments: string;
+  minecraftArguments?: string;
   minimumLauncherVersion: number;
   releaseTime: string;
   time: string;

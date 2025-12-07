@@ -85,14 +85,6 @@ export const install = async (version: Version, basePath: string) => {
       continue;
     }
 
-    if (
-      value.rules &&
-      value.rules.action === "allow" &&
-      value.rules.os.name !== CURRENT_OS
-    ) {
-      continue;
-    }
-
     safeMkdir(
       path.join(
         librariesPath,
