@@ -22,7 +22,7 @@ export type Rules = {
 };
 
 export type Argument = {
-  rules: Rules;
+  rules: Rules[];
   value: string | string[];
 };
 
@@ -63,7 +63,7 @@ export type Version = {
       };
     };
     name: string;
-    rules?: Rules;
+    rules?: Rules[];
   }[];
   logging?: {
     client: {

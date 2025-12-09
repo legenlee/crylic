@@ -1,7 +1,7 @@
 import path from "path";
-import { spawn } from "child_process";
+import cp from "child_process";
 
-import type { Argument, Rules, Version } from "./types";
+import type { Rules, Version } from "./types";
 import { CURRENT_OS } from "../../constants";
 
 export type LaunchOptions = {
@@ -20,7 +20,7 @@ export type LaunchOptions = {
   offline?: boolean;
 };
 
-enum ArgumentVariableKeys {
+enum VariableKeys {
   NATIVES_DIRECTORY = "${natives_directory}",
   LAUNCHER_NAME = "${launcher_name}",
   LAUNCHER_VERSION = "${launcher_version}",
@@ -45,74 +45,127 @@ enum ArgumentVariableKeys {
 }
 
 const checkRules = (rules: Rules) => {
-  if (rules.action === "allow" && rules.os && rules.os !== CURRENT_OS) {
+  // TODO: Implement features condition check
+  if (rules.features) {
     return false;
   }
 
-  if (rules.action === "allow" && rules.arch && rules.arch !== process.arch) {
+  if (rules.os && rules.os !== CURRENT_OS) {
+    return false;
+  }
+
+  if (rules.arch && rules.arch !== process.arch) {
     return false;
   }
 
   return true;
 };
 
-const argumentStringBuilder = (
-  args: (string | Argument)[],
-  values: Partial<Record<ArgumentVariableKeys, string | number | boolean>>,
+const argumentStringFormatter = (
+  original: string,
+  values: Partial<Record<VariableKeys, string | number | boolean>>,
 ) => {
-  const argumentStrings: string[] = [];
+  let argumentString = original;
   const valueEntries = Object.entries(values);
 
-  for (let arg of args) {
-    if (typeof arg === "object") {
-      if (!checkRules(arg.rules)) {
-        continue;
-      }
+  valueEntries.forEach(([key, value]) => {
+    argumentString = argumentString.replace(key, `${value}`);
+  });
 
-      arg = Array.isArray(arg.value) ? arg.value.join(" ") : arg.value;
-    }
-
-    valueEntries.forEach(([k, v]) => {
-      arg.replace(k, `${v}`);
-    });
-
-    argumentStrings.push(arg);
-  }
-
-  return argumentStrings.join(" ");
+  return argumentString;
 };
 
 export const launch = (version: Version, options: LaunchOptions) => {
+  let classpath = "";
+  let jvmArguments = "";
+  let gameArguments = "";
+
   for (const library of version.libraries) {
-    //
+    if (library.rules && !library.rules.every(checkRules)) {
+      continue;
+    }
+
+    classpath += path.join(
+      options.librariesPath,
+      library.downloads.artifact.path,
+    );
   }
 
-  const argumentKeyValueMap = {
-    [ArgumentVariableKeys.NATIVES_DIRECTORY]: options.nativesPath,
-    [ArgumentVariableKeys.LAUNCHER_NAME]: "Crylic",
-    [ArgumentVariableKeys.LAUNCHER_VERSION]: "0.0.1",
-    [ArgumentVariableKeys.CLASSPATH]: "",
+  const variableKeyValueMap = {
+    [VariableKeys.NATIVES_DIRECTORY]: options.nativesPath,
+    [VariableKeys.LAUNCHER_NAME]: "Crylic",
+    [VariableKeys.LAUNCHER_VERSION]: "0.0.1",
+    [VariableKeys.CLASSPATH]: classpath,
 
-    [ArgumentVariableKeys.AUTH_PLAYER_NAME]: options.username,
-    [ArgumentVariableKeys.VERSION_NAME]: version.id,
-    [ArgumentVariableKeys.GAME_DIRECTORY]: options.gamePath,
-    [ArgumentVariableKeys.ASSETS_ROOT]: options.assetsPath,
-    [ArgumentVariableKeys.ASSETS_INDEX_NAME]: version.assetIndex.id,
-    [ArgumentVariableKeys.AUTH_UUID]: options.authUUID,
-    [ArgumentVariableKeys.AUTH_ACCESS_TOKEN]: options.accessToken,
-    [ArgumentVariableKeys.USER_TYPE]: "msa",
-    [ArgumentVariableKeys.VERSION_TYPE]: version.type,
+    [VariableKeys.AUTH_PLAYER_NAME]: options.username,
+    [VariableKeys.VERSION_NAME]: version.id,
+    [VariableKeys.GAME_DIRECTORY]: options.gamePath,
+    [VariableKeys.ASSETS_ROOT]: options.assetsPath,
+    [VariableKeys.ASSETS_INDEX_NAME]: version.assetIndex.id,
+    [VariableKeys.AUTH_UUID]: options.authUUID,
+    [VariableKeys.AUTH_ACCESS_TOKEN]: options.accessToken,
+    [VariableKeys.USER_TYPE]: "msa",
+    [VariableKeys.VERSION_TYPE]: version.type,
   };
 
-  const jvmArgument = "";
-  let gameArgument = "";
-
   if (version.minecraftArguments) {
-    gameArgument = argumentStringBuilder(
-      version.minecraftArguments.split(" "),
-      argumentKeyValueMap,
+    jvmArguments = argumentStringFormatter(
+      "-Djava.library.path=${natives_directory} " +
+        "-Dminecraft.launcher.brand=${launcher_name} " +
+        "-Dminecraft.launcher.version=${launcher_version} " +
+        "-cp ${classpath} " +
+        "-Xss1M",
+      variableKeyValueMap,
+    );
+
+    gameArguments = argumentStringFormatter(
+      version.minecraftArguments,
+      variableKeyValueMap,
     );
   } else {
-    //
+    let unformattedJvmArguments = "";
+    let unformattedGameArguments = "";
+
+    for (let argument of version.arguments?.jvm ?? []) {
+      if (typeof argument === "object") {
+        if (!argument.rules.every(checkRules)) {
+          continue;
+        }
+
+        argument = Array.isArray(argument.value)
+          ? argument.value.join(" ")
+          : argument.value;
+      }
+
+      unformattedJvmArguments += argument;
+    }
+
+    for (let argument of version.arguments?.game ?? []) {
+      if (typeof argument === "object") {
+        if (!argument.rules.every(checkRules)) {
+          continue;
+        }
+
+        argument = Array.isArray(argument.value)
+          ? argument.value.join(" ")
+          : argument.value;
+      }
+
+      unformattedGameArguments += argument;
+    }
+
+    jvmArguments = argumentStringFormatter(
+      unformattedJvmArguments,
+      variableKeyValueMap,
+    );
+
+    gameArguments = argumentStringFormatter(
+      unformattedGameArguments,
+      variableKeyValueMap,
+    );
   }
+
+  const process = cp.spawn(
+    `java ${jvmArguments} ${version.mainClass} ${gameArguments}`,
+  );
 };

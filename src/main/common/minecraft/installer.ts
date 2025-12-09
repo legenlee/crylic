@@ -3,7 +3,6 @@ import path from "path";
 
 import type { AssetIndex, Version, VersionManifest } from "./types";
 import { request } from "../https";
-import { CURRENT_OS } from "../../constants";
 
 const RESOURCES_URL = "https://resources.download.minecraft.net";
 // const LIBRARIES_URL = "https://libraries.minecraft.net";
