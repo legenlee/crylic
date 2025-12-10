@@ -1,5 +1,5 @@
-import crypto from "crypto";
-import fs from "fs";
+import crypto from "node:crypto";
+import fs from "node:fs";
 
 export const calculateSha1 = (filePath: string) =>
   new Promise<string>((resolve, reject) => {

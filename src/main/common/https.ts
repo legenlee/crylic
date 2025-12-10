@@ -1,5 +1,5 @@
-import fs from "fs";
-import https, { RequestOptions } from "https";
+import fs from "node:fs";
+import https, { RequestOptions } from "node:https";
 
 export class ResponseError extends Error {
   public constructor(

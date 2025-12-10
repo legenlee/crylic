@@ -1,24 +1,25 @@
-import path from "path";
-import cp from "child_process";
+import path from "node:path";
+import cp from "node:child_process";
 
-import type { Rules, Version } from "./types";
 import { CURRENT_OS } from "../../constants";
+import { MinecraftRules, MinecraftVersionDetail } from "./types";
 
-export type LaunchOptions = {
-  assetsPath: string;
-  librariesPath: string;
-  nativesPath: string;
-  gamePath: string;
+export interface LaunchOptions {
+  assetsPath?: string;
+  librariesPath?: string;
+  versionsPath?: string;
+  nativesPath?: string;
+  gamePath?: string;
   jrePath?: string;
   resolution?: {
     width: string;
     height: string;
   };
-  username: string;
-  authUUID: string;
+  username?: string;
+  authUUID?: string;
   accessToken?: string;
   offline?: boolean;
-};
+}
 
 enum VariableKeys {
   NATIVES_DIRECTORY = "${natives_directory}",
@@ -44,7 +45,21 @@ enum VariableKeys {
   QUICK_PLAY_REALMS = "${quickPlayRealms}",
 }
 
-const checkRules = (rules: Rules) => {
+const DEFAULT_LAUNCH_OPTIONS = Object.freeze<
+  Required<
+    Omit<LaunchOptions, "resolution" | "jrePath" | "accessToken" | "authUUID">
+  >
+>({
+  assetsPath: path.join(__dirname, "minecraft", "assets"),
+  librariesPath: path.join(__dirname, "minecraft", "libraries"),
+  versionsPath: path.join(__dirname, "minecraft", "versions"),
+  nativesPath: path.join(__dirname, "minecraft", "natives"),
+  gamePath: path.join(__dirname, ".minecraft"),
+  username: "offline-user",
+  offline: true,
+});
+
+const checkRules = (rules: MinecraftRules) => {
   // TODO: Implement features condition check
   if (rules.features) {
     return false;
@@ -75,7 +90,10 @@ const argumentStringFormatter = (
   return argumentString;
 };
 
-export const launch = (version: Version, options: LaunchOptions) => {
+export const launch = (
+  version: MinecraftVersionDetail,
+  options: LaunchOptions = DEFAULT_LAUNCH_OPTIONS,
+) => {
   let classpath = "";
   let jvmArguments = "";
   let gameArguments = "";
@@ -165,7 +183,5 @@ export const launch = (version: Version, options: LaunchOptions) => {
     );
   }
 
-  const process = cp.spawn(
-    `java ${jvmArguments} ${version.mainClass} ${gameArguments}`,
-  );
+  cp.spawn(`java ${jvmArguments} ${version.mainClass} ${gameArguments}`);
 };
