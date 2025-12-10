@@ -91,7 +91,7 @@ export interface MinecraftVersionDetail {
   assetIndex: MinecraftAssetIndex;
   assets: string;
   complianceLevel: number;
-  download: Record<MinecraftDownloadType, MinecraftFile>;
+  downloads: Record<MinecraftDownloadType, MinecraftFile>;
   id: string;
   javaVersion: MinecraftJavaVersion;
   libraries: MinecraftLibrary[];
