@@ -93,7 +93,7 @@ export const launch = (version: Version, options: LaunchOptions) => {
 
   const variableKeyValueMap = {
     [VariableKeys.NATIVES_DIRECTORY]: options.nativesPath,
-    [VariableKeys.LAUNCHER_NAME]: "Crylic",
+    [VariableKeys.LAUNCHER_NAME]: "Nozomi",
     [VariableKeys.LAUNCHER_VERSION]: "0.0.1",
     [VariableKeys.CLASSPATH]: classpath,
 

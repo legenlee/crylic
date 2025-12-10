@@ -1,4 +1,4 @@
-export const APP_ID = "crylic";
+export const APP_ID = "nozomi";
 
 export const CURRENT_OS =
   process.platform === "win32"

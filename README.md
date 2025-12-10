@@ -1,6 +1,6 @@
-# Crylic
+# Nozomi (Crylic)
 
-Crylic is a custom Minecraft launcher.
+Nozomi is a custom Minecraft launcher.
 
 ## Development
 
@@ -39,5 +39,5 @@ yarn start
 
 ## README Translations
 
-- [English](https://github.com/legenlee/crylic)
+- [English](https://github.com/legenlee/nozomi)
 - [Korean / 한국어](/i18n/README.ko.md)

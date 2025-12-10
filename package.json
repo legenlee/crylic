@@ -1,6 +1,6 @@
 {
-  "name": "crylic",
-  "productName": "Crylic",
+  "name": "nozomi",
+  "productName": "Nozomi",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".vite/build/main.js",
