@@ -1,46 +1,49 @@
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
-import type { AssetIndex, Version, VersionManifest } from "./types";
 import { request } from "../https";
+import {
+  MinecraftVersions,
+  MinecraftVersion,
+  MinecraftVersionDetail,
+  MinecraftAssets,
+} from "./types";
+import { safeMkdir } from "../fileSystem";
 
+export interface InstallOptions {
+  assetsPath?: string;
+  librariesPath?: string;
+  versionsPath?: string;
+}
+
+/* eslint-disable prettier/prettier */
 const RESOURCES_URL = "https://resources.download.minecraft.net";
-// const LIBRARIES_URL = "https://libraries.minecraft.net";
-const MANIFEST_URL =
-  "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
+const MANIFEST_URL = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json";
+/* eslint-enable */
 
-export const getVersionManifest = async (): Promise<VersionManifest> => {
-  return await request(MANIFEST_URL);
+const DEFAULT_INSTALL_OPTIONS = Object.freeze<Required<InstallOptions>>({
+  assetsPath: path.join(__dirname, "minecraft", "assets"),
+  librariesPath: path.join(__dirname, "minecraft", "libraries"),
+  versionsPath: path.join(__dirname, "minecraft", "versions"),
+});
+
+export const getVersions = async (): Promise<MinecraftVersions> => {
+  return await request<MinecraftVersions>(MANIFEST_URL);
 };
 
-export const install = async (version: Version, basePath: string) => {
-  const getResourcePath = (...targetPaths: string[]) =>
-    path.join(basePath, ...targetPaths);
-
-  const safeMkdir = (targetPath: string) => {
-    if (!fs.existsSync(targetPath)) {
-      fs.mkdirSync(targetPath, {
-        recursive: true,
-      });
-    }
-  };
-
-  const assetsPath = getResourcePath("assets");
-  const librariesPath = getResourcePath("libraries");
-  const clientPath = getResourcePath("versions", "minecraft", version.id);
-
+export const installAssets = async (
+  version: MinecraftVersionDetail,
+  assetsPath: string,
+) => {
   safeMkdir(assetsPath);
-  safeMkdir(librariesPath);
-  safeMkdir(clientPath);
 
-  // Start of installing assets
   const assetIndexesPath = path.join(assetsPath, "indexes");
   const assetObjectsPath = path.join(assetsPath, "objects");
 
   safeMkdir(assetIndexesPath);
   safeMkdir(assetObjectsPath);
 
-  const assetIndexPath = path.join(assetIndexesPath, version.id);
+  const assetIndexPath = path.join(assetIndexesPath, `${version.id}.json`);
 
   if (!fs.existsSync(assetIndexPath)) {
     await request(version.assetIndex.url, {
@@ -50,7 +53,7 @@ export const install = async (version: Version, basePath: string) => {
 
   const assetIndex = JSON.parse(
     fs.readFileSync(assetIndexPath).toString("utf-8"),
-  ) as AssetIndex;
+  ) as MinecraftAssets;
 
   for (const value of Object.values(assetIndex.objects)) {
     const hashBase = value.hash.slice(0, 2);
@@ -71,14 +74,14 @@ export const install = async (version: Version, basePath: string) => {
       console.error(err);
     }
   }
-  // End of installing assets
+};
 
-  // Start of installing libraries
+export const installLibraries = async (
+  version: MinecraftVersionDetail,
+  installPath: string,
+) => {
   for (const value of version.libraries) {
-    const downloadPath = path.join(
-      librariesPath,
-      value.downloads.artifact.path,
-    );
+    const downloadPath = path.join(installPath, value.downloads.artifact.path);
 
     if (fs.existsSync(downloadPath)) {
       continue;
@@ -86,7 +89,7 @@ export const install = async (version: Version, basePath: string) => {
 
     safeMkdir(
       path.join(
-        librariesPath,
+        installPath,
         value.downloads.artifact.path.split("/").slice(0, -1).join("/"),
       ),
     );
@@ -99,14 +102,33 @@ export const install = async (version: Version, basePath: string) => {
       console.error(err);
     }
   }
-  // End of installing libraries
+};
+
+export const install = async (
+  version: MinecraftVersion,
+  options: InstallOptions = DEFAULT_INSTALL_OPTIONS,
+) => {
+  safeMkdir(options.assetsPath);
+  safeMkdir(options.librariesPath);
+  safeMkdir(path.join(options.versionsPath, version.id));
+
+  const detail = await request<MinecraftVersionDetail>(version.url, {
+    downloadPath: path.join(
+      options.versionsPath,
+      version.id,
+      `${version.id}.json`,
+    ),
+  });
+
+  await installAssets(detail, options.assetsPath);
+  await installLibraries(detail, options.librariesPath);
 
   // Start of installing client
-  for (const [, value] of Object.entries(version.download).filter(([key]) =>
+  for (const [, value] of Object.entries(detail.download).filter(([key]) =>
     key.startsWith("client"),
   )) {
     const fileName = value.url.split("/").pop();
-    const downloadPath = path.join(clientPath, fileName);
+    const downloadPath = path.join(options.versionsPath, version.id, fileName);
 
     if (fs.existsSync(downloadPath)) {
       continue;

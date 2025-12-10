@@ -1,70 +1,69 @@
-export type VersionManifest = {
-  latest: {
-    release: string;
-    snapshot: string;
-  };
-  versions: {
-    id: string;
-    type: "release" | "snapshot" | "old_alpha" | "old_beta";
-    url: string;
-    time: string;
-    releaseTime: string;
-    sha1: string;
-    complianceLevel: number;
-  }[];
-};
+export interface MinecraftLatest {
+  release: string;
+  snapshot: string;
+}
 
-export type Rules = {
+export interface MinecraftVersion {
+  id: string;
+  type: "release" | "snapshot" | "old_alpha" | "old_beta";
+  url: string;
+  time: string;
+  releaseTime: string;
+  sha1: string;
+  complianceLevel: number;
+}
+
+export interface MinecraftRules {
   action: string;
   features?: Record<string, boolean>;
   os?: string;
   arch?: string;
-};
+}
 
-export type Argument = {
-  rules: Rules[];
+export interface MinecraftArgument {
+  rules: MinecraftRules[];
   value: string | string[];
-};
+}
 
-export type Version = {
-  arguments?: {
-    game: (string | Argument)[];
-    jvm: (string | Argument)[];
-  };
-  assetIndex: {
-    id: string;
-    sha1: string;
-    size: number;
-    totalSize: number;
-    url: string;
-  };
-  assets: string;
-  complianceLevel: number;
-  download: Record<
-    "client" | "client_mappings" | "server" | "server_mappings",
-    {
-      sha1: string;
-      size: number;
-      url: string;
-    }
-  >;
+export interface MinecraftFile {
+  url: string;
+  sha1: string;
+  size: number;
+}
+
+export type MinecraftDownloadType =
+  | "client"
+  | "client_mappings"
+  | "server"
+  | "server_mappings";
+
+export interface MinecraftAssetIndex extends MinecraftFile {
   id: string;
-  javaVersion: {
-    component: string;
-    majorVersion: number;
-  };
-  libraries: {
-    downloads: {
-      artifact: {
-        path: string;
-        sha1: string;
-        size: number;
-        url: string;
-      };
+  totalSize: number;
+}
+
+export interface MinecraftJavaVersion {
+  component: string;
+  majorVersion: number;
+}
+
+export interface MinecraftLibrary {
+  downloads: {
+    artifact: MinecraftFile & {
+      path: string;
     };
-    name: string;
-    rules?: Rules[];
-  }[];
+  };
+  name: string;
+  rules?: MinecraftRules[];
+}
+
+export type MinecraftReleaseType =
+  | "release"
+  | "snapshot"
+  | "old_beta"
+  | "old_alpha";
+
+export interface MinecraftLogging {
   logging?: {
     client: {
       argument: string;
@@ -77,20 +76,39 @@ export type Version = {
       type: string;
     };
   };
+}
+
+export type MinecraftVersions = {
+  latest: MinecraftLatest;
+  versions: MinecraftVersion[];
+};
+
+export interface MinecraftVersionDetail {
+  arguments?: {
+    game: (string | MinecraftArgument)[];
+    jvm: (string | MinecraftArgument)[];
+  };
+  assetIndex: MinecraftAssetIndex;
+  assets: string;
+  complianceLevel: number;
+  download: Record<MinecraftDownloadType, MinecraftFile>;
+  id: string;
+  javaVersion: MinecraftJavaVersion;
+  libraries: MinecraftLibrary[];
+  logging?: MinecraftLogging;
   mainClass: string;
   minecraftArguments?: string;
   minimumLauncherVersion: number;
   releaseTime: string;
   time: string;
-  type: "release" | "snapshot" | "old_beta" | "old_alpha";
-};
+  type: MinecraftReleaseType;
+}
 
-export type AssetIndex = {
-  objects: Record<
-    string,
-    {
-      hash: string;
-      size: number;
-    }
-  >;
-};
+export interface MinecraftAssetFile {
+  hash: string;
+  size: number;
+}
+
+export interface MinecraftAssets {
+  objects: Record<string, MinecraftAssetFile>;
+}
