@@ -58,17 +58,22 @@ export const request = <T = unknown>(
       });
 
       res.on("close", () => {
-        reject(new Error("Connection closed before response was ended."));
+        resolve(undefined);
+        // reject(new Error("Connection closed before response was ended."));
       });
 
       res.on("end", () => {
-        const jsonParsedData = JSON.parse(body);
+        if (res.headers["content-type"] === "application/json") {
+          const jsonParsedData = JSON.parse(body);
 
-        if (res.statusCode >= 300) {
-          return reject(new ResponseError(res.statusCode, jsonParsedData));
+          if (res.statusCode >= 300) {
+            return reject(new ResponseError(res.statusCode, jsonParsedData));
+          }
+
+          resolve(jsonParsedData);
         }
 
-        resolve(jsonParsedData);
+        resolve(undefined);
       });
     });
 
