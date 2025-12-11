@@ -13,15 +13,18 @@ export interface MinecraftVersion {
   complianceLevel: number;
 }
 
-export interface MinecraftRules {
-  action: string;
+export interface MinecraftRule {
+  action: "allow" | "disallow";
   features?: Record<string, boolean>;
-  os?: string;
-  arch?: string;
+  os?: {
+    name: string;
+    version?: string;
+    arch?: string;
+  };
 }
 
 export interface MinecraftArgument {
-  rules: MinecraftRules[];
+  rules: MinecraftRule[];
   value: string | string[];
 }
 
@@ -54,7 +57,7 @@ export interface MinecraftLibrary {
     };
   };
   name: string;
-  rules?: MinecraftRules[];
+  rules?: MinecraftRule[];
 }
 
 export type MinecraftReleaseType =

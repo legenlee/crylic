@@ -2,7 +2,11 @@ import path from "node:path";
 import cp from "node:child_process";
 
 import { CURRENT_OS } from "../../constants";
-import { MinecraftRules, MinecraftVersionDetail } from "./types";
+import {
+  MinecraftLibrary,
+  MinecraftRule,
+  MinecraftVersionDetail,
+} from "./types";
 
 export interface LaunchOptions {
   assetsPath?: string;
@@ -33,7 +37,7 @@ enum VariableKeys {
   ASSETS_INDEX_NAME = "${assets_index_name}",
   AUTH_UUID = "${auth_uuid}",
   AUTH_ACCESS_TOKEN = "${auth_access_token}",
-  CLIENT_ID = "${clientId}",
+  CLIENT_ID = "${clientid}",
   AUTH_XUID = "${auth_xuid}",
   VERSION_TYPE = "${version_type}",
   RESOLUTION_WIDTH = "${resolution_width}",
@@ -45,76 +49,80 @@ enum VariableKeys {
   QUICK_PLAY_REALMS = "${quickPlayRealms}",
 }
 
-const DEFAULT_LAUNCH_OPTIONS = Object.freeze<
-  Required<
-    Omit<LaunchOptions, "resolution" | "jrePath" | "accessToken" | "authUUID">
-  >
->({
+const DEFAULT_LAUNCH_OPTIONS: Required<Omit<LaunchOptions, "resolution">> = {
   assetsPath: path.join(__dirname, "minecraft", "assets"),
   librariesPath: path.join(__dirname, "minecraft", "libraries"),
   versionsPath: path.join(__dirname, "minecraft", "versions"),
   nativesPath: path.join(__dirname, "minecraft", "natives"),
-  gamePath: path.join(__dirname, ".minecraft"),
+  gamePath: path.join(__dirname, "minecraft", ".minecraft"),
+  authUUID: crypto.randomUUID(),
+  accessToken: "",
+  jrePath: "java",
   username: "offline-user",
   offline: true,
-});
+};
 
-const checkRules = (rules: MinecraftRules) => {
+const checkRules = (rule: MinecraftRule) => {
+  const basicCondition = rule.action === "allow";
+
   // TODO: Implement features condition check
-  if (rules.features) {
+  if (rule.features) {
     return false;
   }
 
-  if (rules.os && rules.os !== CURRENT_OS) {
-    return false;
-  }
+  if (rule.os) {
+    const osNameCondition = rule.os.name === CURRENT_OS;
 
-  if (rules.arch && rules.arch !== process.arch) {
-    return false;
+    if (rule.os.arch) {
+      return rule.os.arch === process.arch && osNameCondition && basicCondition;
+    }
+
+    return osNameCondition && basicCondition;
   }
 
   return true;
 };
 
-const argumentStringFormatter = (
-  original: string,
+const javaArgumentFormatter = (
+  javaArguments: string[],
   values: Partial<Record<VariableKeys, string | number | boolean>>,
 ) => {
-  let argumentString = original;
-  const valueEntries = Object.entries(values);
+  const valueKeys = Object.values(VariableKeys);
 
-  valueEntries.forEach(([key, value]) => {
-    argumentString = argumentString.replace(key, `${value}`);
+  valueKeys.forEach((key) => {
+    javaArguments = javaArguments.map((javaArgument) =>
+      javaArgument.replaceAll(key, `${values[key]}`),
+    );
   });
 
-  return argumentString;
+  return javaArguments;
 };
 
 export const launch = (
   version: MinecraftVersionDetail,
   options: LaunchOptions = DEFAULT_LAUNCH_OPTIONS,
 ) => {
-  let classpath = "";
-  let jvmArguments = "";
-  let gameArguments = "";
+  const classpath: string[] = [];
+  let jvmArguments: string[] = [];
+  let gameArguments: string[] = [];
 
   for (const library of version.libraries) {
     if (library.rules && !library.rules.every(checkRules)) {
       continue;
     }
 
-    classpath += path.join(
-      options.librariesPath,
-      library.downloads.artifact.path,
+    classpath.push(
+      path.join(options.librariesPath, library.downloads.artifact.path),
     );
   }
 
+  classpath.push(path.join(options.versionsPath, version.id, "client.jar"));
+
   const variableKeyValueMap = {
     [VariableKeys.NATIVES_DIRECTORY]: options.nativesPath,
-    [VariableKeys.LAUNCHER_NAME]: "Nozomi",
-    [VariableKeys.LAUNCHER_VERSION]: "0.0.1",
-    [VariableKeys.CLASSPATH]: classpath,
-
+    [VariableKeys.LAUNCHER_NAME]: "nozomi",
+    [VariableKeys.LAUNCHER_VERSION]: "4.0.0",
+    [VariableKeys.CLASSPATH]: classpath.join(path.delimiter),
     [VariableKeys.AUTH_PLAYER_NAME]: options.username,
     [VariableKeys.VERSION_NAME]: version.id,
     [VariableKeys.GAME_DIRECTORY]: options.gamePath,
@@ -124,25 +132,29 @@ export const launch = (
     [VariableKeys.AUTH_ACCESS_TOKEN]: options.accessToken,
     [VariableKeys.USER_TYPE]: "msa",
     [VariableKeys.VERSION_TYPE]: version.type,
+    [VariableKeys.CLIENT_ID]: "",
+    [VariableKeys.AUTH_XUID]: "",
   };
 
   if (version.minecraftArguments) {
-    jvmArguments = argumentStringFormatter(
-      "-Djava.library.path=${natives_directory} " +
-        "-Dminecraft.launcher.brand=${launcher_name} " +
-        "-Dminecraft.launcher.version=${launcher_version} " +
-        "-cp ${classpath} " +
-        "-Xss1M",
+    jvmArguments = javaArgumentFormatter(
+      [
+        '"-Djava.library.path=${natives_directory}"',
+        '"-Dminecraft.launcher.brand=${launcher_name}"',
+        '"-Dminecraft.launcher.version=${launcher_version}"',
+        '"-cp ${classpath}"',
+        '"-Xss1M"',
+      ],
       variableKeyValueMap,
     );
 
-    gameArguments = argumentStringFormatter(
-      version.minecraftArguments,
+    gameArguments = javaArgumentFormatter(
+      version.minecraftArguments.split(" "),
       variableKeyValueMap,
     );
   } else {
-    let unformattedJvmArguments = "";
-    let unformattedGameArguments = "";
+    const unformattedJvmArguments: string[] = [];
+    const unformattedGameArguments: string[] = [];
 
     for (let argument of version.arguments?.jvm ?? []) {
       if (typeof argument === "object") {
@@ -155,7 +167,7 @@ export const launch = (
           : argument.value;
       }
 
-      unformattedJvmArguments += argument;
+      unformattedJvmArguments.push(argument);
     }
 
     for (let argument of version.arguments?.game ?? []) {
@@ -169,19 +181,33 @@ export const launch = (
           : argument.value;
       }
 
-      unformattedGameArguments += argument;
+      unformattedGameArguments.push(argument);
     }
 
-    jvmArguments = argumentStringFormatter(
+    jvmArguments = javaArgumentFormatter(
       unformattedJvmArguments,
       variableKeyValueMap,
     );
 
-    gameArguments = argumentStringFormatter(
+    gameArguments = javaArgumentFormatter(
       unformattedGameArguments,
       variableKeyValueMap,
     );
   }
 
-  cp.spawn(`java ${jvmArguments} ${version.mainClass} ${gameArguments}`);
+  console.log(jvmArguments.join(" "));
+  console.log(gameArguments.join(" "));
+
+  const childProcess = cp.spawn(
+    options.jrePath,
+    [...jvmArguments, version.mainClass, ...gameArguments],
+    {
+      detached: true,
+    },
+  );
+
+  // childProcess.on("message", (message) => console.log(message.toString()));
+  // childProcess.stdout.on("data", (data) => console.log(data.toString()));
+  // childProcess.stdout.on("error", (error) => console.log(error.toString()));
+  // childProcess.stdout.on("close", () => console.log("Closed"));
 };
