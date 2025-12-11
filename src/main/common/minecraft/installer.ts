@@ -62,7 +62,10 @@ export const installAssets = async (
   safeMkdir(assetIndexesPath);
   safeMkdir(assetObjectsPath);
 
-  const assetIndexPath = path.join(assetIndexesPath, `${version.id}.json`);
+  const assetIndexPath = path.join(
+    assetIndexesPath,
+    `${version.assetIndex.id}.json`,
+  );
 
   let assetIndex: MinecraftAssets;
 
