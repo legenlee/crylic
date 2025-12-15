@@ -16,11 +16,25 @@ import "@fontsource/roboto/900-italic.css";
 import "@mdi/font/css/materialdesignicons.css";
 
 import "vuetify/styles";
-import { createVuetify } from "vuetify";
+import { createVuetify, ThemeDefinition } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import { en, ko } from "vuetify/locale";
 import { md3 } from "vuetify/blueprints";
+
+const light: ThemeDefinition = {
+  dark: false,
+  colors: {
+    primary: "#d5fba9",
+  },
+};
+
+const dark: ThemeDefinition = {
+  dark: true,
+  colors: {
+    primary: "#88ae7b",
+  },
+};
 
 export const vuetify = createVuetify({
   blueprint: md3,
@@ -35,5 +49,9 @@ export const vuetify = createVuetify({
   },
   theme: {
     defaultTheme: "system",
+    themes: {
+      light,
+      dark,
+    },
   },
 });
