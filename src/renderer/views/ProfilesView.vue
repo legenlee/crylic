@@ -55,12 +55,36 @@ const profiles = [
 
 <template>
   <VContainer>
+    <div class="mb-4 d-flex align-start ga-2">
+      <VTextField
+        flat
+        variant="solo-filled"
+        label="Profile Name"
+        prepend-inner-icon="mdi-magnify"
+        rounded="xl"
+        max-width="400"
+        hide-details
+        density="comfortable"
+      />
+
+      <VSelect
+        flat
+        variant="solo-filled"
+        label="Sort by:"
+        rounded="xl"
+        max-width="200"
+        density="comfortable"
+        hide-details
+        :items="['Name', 'Last Played']"
+      />
+    </div>
+
     <VRow>
       <VCol v-for="(profile, index) in profiles" :key="index" md="4" lg="3">
-        <VCard variant="tonal" color="primary">
+        <VCard variant="tonal" rounded="xl">
           <div class="d-flex">
             <div class="align-self-center">
-              <VAvatar border class="mt-4 mb-4 ml-4" rounded="lg" size="48">
+              <VAvatar border class="my-4 ml-4" rounded="lg" size="48">
                 <VImg></VImg>
               </VAvatar>
             </div>
