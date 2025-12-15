@@ -6,7 +6,7 @@ const auth = ref(false);
 </script>
 
 <template>
-  <VLayout>
+  <VLayout max-height="100vh">
     <VNavigationDrawer permanent rail color="primary">
       <VList nav density="compact">
         <VListItem
@@ -36,12 +36,16 @@ const auth = ref(false);
               <VListItem title="Sign In" prepend-icon="mdi-login" link />
             </VList>
           </VMenu>
-          <VListItem link prepend-icon="mdi-cog" />
+          <VListItem
+            link
+            :to="{ name: RouteNames.SETTINGS }"
+            prepend-icon="mdi-cog"
+          />
         </VList>
       </template>
     </VNavigationDrawer>
 
-    <VMain>
+    <VMain class="overflow-y-auto">
       <slot />
     </VMain>
   </VLayout>

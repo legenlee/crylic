@@ -1,10 +1,11 @@
 import { RouteRecordRaw } from "vue-router";
 
-export const RouteNames = {
-  INIT: "init",
-  PROFILES: "profiles",
-  PROFILE_DETAIL: "profile-detail",
-} as const;
+export enum RouteNames {
+  INIT = "init",
+  PROFILES = "profiles",
+  PROFILE_DETAIL = "profile-detail",
+  SETTINGS = "settings",
+}
 
 export const routes: RouteRecordRaw[] = [
   {
@@ -24,5 +25,10 @@ export const routes: RouteRecordRaw[] = [
     name: RouteNames.PROFILE_DETAIL,
     path: "/profiles/:id",
     component: () => import("./views/ProfileDetailView.vue"),
+  },
+  {
+    name: RouteNames.SETTINGS,
+    path: "/settings",
+    component: () => import("./views/SettingsView.vue"),
   },
 ];
