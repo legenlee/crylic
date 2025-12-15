@@ -10,6 +10,8 @@ if (started) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    minWidth: 1280,
+    minHeight: 720,
     width: 1280,
     height: 720,
     webPreferences: {
