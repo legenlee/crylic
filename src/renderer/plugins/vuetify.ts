@@ -22,9 +22,25 @@ import * as directives from "vuetify/directives";
 import { en, ko } from "vuetify/locale";
 import { md3 } from "vuetify/blueprints";
 
-const colors: ThemeDefinition["colors"] = {
+const primaryColors = {
   primary: "#88ae7b",
   "primary-darken-1": "#7ea26f",
+};
+
+const light: ThemeDefinition = {
+  colors: {
+    ...primaryColors,
+    background: "#e7eee4",
+  },
+};
+
+const dark: ThemeDefinition = {
+  dark: true,
+  colors: {
+    ...primaryColors,
+    background: "#181914",
+    surface: "#303228",
+  },
 };
 
 export const vuetify = createVuetify({
@@ -41,12 +57,8 @@ export const vuetify = createVuetify({
   theme: {
     defaultTheme: "system",
     themes: {
-      light: {
-        colors,
-      },
-      dark: {
-        colors,
-      },
+      light,
+      dark,
     },
   },
 });
