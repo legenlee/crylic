@@ -4,6 +4,11 @@ import DefaultLayout from "./layouts/DefaultLayout.vue";
 
 <template>
   <VApp>
+    <VSystemBar window style="-webkit-app-region: drag">
+      <span>Nozomi (In Development)</span>
+      <VSpacer></VSpacer>
+    </VSystemBar>
+
     <DefaultLayout>
       <RouterView />
     </DefaultLayout>
