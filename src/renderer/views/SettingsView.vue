@@ -6,24 +6,33 @@
       <VListSubheader title="General" />
       <VListItem prepend-icon="mdi-translate" link>
         <VListItemTitle>Language</VListItemTitle>
-        <VListItemSubtitle class="text-primary">
+        <VListItemSubtitle class="text-primary-darken-1">
           English (US)
         </VListItemSubtitle>
       </VListItem>
 
+      <VListItem prepend-icon="mdi-brightness-6" link>
+        <VListItemTitle>Theme</VListItemTitle>
+        <VListItemSubtitle class="text-primary-darken-1"
+          >System</VListItemSubtitle
+        >
+      </VListItem>
+    </VList>
+
+    <VList rounded="xl" lines="two">
+      <VListSubheader title="Update" />
       <VListItem prepend-icon="mdi-update" link>
-        <VListItemTitle>And more settings 1</VListItemTitle>
-        <VListItemSubtitle>placeholder</VListItemSubtitle>
+        <VListItemTitle>Check Updates</VListItemTitle>
+        <VListItemSubtitle class="text-primary-darken-1"
+          >0.0.1</VListItemSubtitle
+        >
       </VListItem>
 
-      <VListItem prepend-icon="mdi-update" link>
-        <VListItemTitle>And more settings 1</VListItemTitle>
-        <VListItemSubtitle>placeholder</VListItemSubtitle>
-      </VListItem>
-
-      <VListItem prepend-icon="mdi-update" link>
-        <VListItemTitle>And more settings 1</VListItemTitle>
-        <VListItemSubtitle>placeholder</VListItemSubtitle>
+      <VListItem prepend-icon="mdi-swap-horizontal" link>
+        <VListItemTitle>Switch Update Channels</VListItemTitle>
+        <VListItemSubtitle class="text-primary-darken-1"
+          >Stable</VListItemSubtitle
+        >
       </VListItem>
     </VList>
 
@@ -31,20 +40,20 @@
       <VListSubheader title="Global Launch Settings" />
       <VListItem prepend-icon="mdi-puzzle" link>
         <VListItemTitle>Java Location</VListItemTitle>
-        <VListItemSubtitle class="text-primary">
-          Java Location placeholder
+        <VListItemSubtitle class="text-primary-darken-1">
+          path/to/java/location
         </VListItemSubtitle>
       </VListItem>
 
       <VListItem prepend-icon="mdi-tag" link>
-        <VListItemTitle>Custom JVM argument</VListItemTitle>
-        <VListItemSubtitle class="text-primary">
-          JVM argument placeholder
+        <VListItemTitle>Custom JVM Argument</VListItemTitle>
+        <VListItemSubtitle class="text-primary-darken-1">
+          -Xms1G -Xmx4G
         </VListItemSubtitle>
       </VListItem>
 
       <VListItem prepend-icon="mdi-memory" link>
-        <VListItemTitle>Memory allocation</VListItemTitle>
+        <VListItemTitle>Memory Allocation</VListItemTitle>
         <VListItemSubtitle>
           Sets minimum and maximum memory allocation.
         </VListItemSubtitle>
