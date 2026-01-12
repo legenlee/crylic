@@ -46,6 +46,11 @@ const dark: ThemeDefinition = {
 export const vuetify = createVuetify({
   blueprint: md3,
   components,
+  defaults: {
+    VBtn: {
+      elevation: 0,
+    },
+  },
   directives,
   locale: {
     messages: { ko, en },
