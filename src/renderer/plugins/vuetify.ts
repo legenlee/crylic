@@ -30,6 +30,7 @@ const primaryColors = {
 const light: ThemeDefinition = {
   colors: {
     ...primaryColors,
+    surface: "#f3f7f2",
     background: "#e7eee4",
   },
 };
