@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <VContainer class="d-flex flex-column ga-4">
+  <div class="d-flex flex-column ga-4">
     <VList rounded="xl" lines="two">
       <VListSubheader title="General" />
       <VListItem prepend-icon="mdi-translate" link>
@@ -13,9 +13,9 @@
 
       <VListItem prepend-icon="mdi-brightness-6" link>
         <VListItemTitle>Theme</VListItemTitle>
-        <VListItemSubtitle class="text-primary-darken-1"
-          >System</VListItemSubtitle
-        >
+        <VListItemSubtitle class="text-primary-darken-1">
+          System
+        </VListItemSubtitle>
       </VListItem>
     </VList>
 
@@ -23,16 +23,16 @@
       <VListSubheader title="Update" />
       <VListItem prepend-icon="mdi-update" link>
         <VListItemTitle>Check Updates</VListItemTitle>
-        <VListItemSubtitle class="text-primary-darken-1"
-          >0.0.1</VListItemSubtitle
-        >
+        <VListItemSubtitle class="text-primary-darken-1">
+          0.0.1
+        </VListItemSubtitle>
       </VListItem>
 
       <VListItem prepend-icon="mdi-swap-horizontal" link>
         <VListItemTitle>Switch Update Channels</VListItemTitle>
-        <VListItemSubtitle class="text-primary-darken-1"
-          >Stable</VListItemSubtitle
-        >
+        <VListItemSubtitle class="text-primary-darken-1">
+          Stable
+        </VListItemSubtitle>
       </VListItem>
     </VList>
 
@@ -74,5 +74,5 @@
         </template>
       </VListItem>
     </VList>
-  </VContainer>
+  </div>
 </template>
