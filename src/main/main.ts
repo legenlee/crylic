@@ -18,7 +18,13 @@ const createWindow = () => {
       preload: path.join(__dirname, "preload.js"),
     },
     titleBarStyle: "hidden",
-    ...(process.platform !== "darwin" ? { titleBarOverlay: true } : {}),
+    ...(process.platform !== "darwin"
+      ? {
+          titleBarOverlay: {
+            color: "#00000000",
+          },
+        }
+      : {}),
   });
 
   // and load the index.html of the app.
