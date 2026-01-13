@@ -32,7 +32,7 @@ onUnmounted(() => {
 
 <template>
   <VApp>
-    <VSystemBar class="titlebar" color="surface" :height="titlebarHeight">
+    <VSystemBar id="titlebar" color="surface" :height="titlebarHeight">
       <div class="mx-auto">Nozomi (In Development)</div>
     </VSystemBar>
 
@@ -79,8 +79,6 @@ onUnmounted(() => {
 
     <VMain scrollable>
       <VContainer class="fill-height" fluid>
-        <div class="title-bar"></div>
-
         <RouterView v-slot="{ Component }">
           <VSlideYReverseTransition hide-on-leave>
             <component :is="Component" style="width: 100%; min-height: 100%" />
@@ -92,7 +90,7 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
-.titlebar {
+#titlebar {
   -webkit-app-region: drag;
 }
 </style>
