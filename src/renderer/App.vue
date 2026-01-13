@@ -89,7 +89,7 @@ onUnmounted(() => {
   </VApp>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 #titlebar {
   -webkit-app-region: drag;
 }
