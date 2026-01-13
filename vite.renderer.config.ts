@@ -4,5 +4,20 @@ import vuetify from "vite-plugin-vuetify";
 
 // https://vitejs.dev/config
 export default defineConfig({
-  plugins: [vue(), vuetify()],
+  css: {
+    preprocessorOptions: {
+      sass: {
+        api: "modern-compiler",
+        quietDeps: true,
+      },
+    },
+  },
+  plugins: [
+    vue(),
+    vuetify({
+      styles: {
+        configFile: "src/renderer/styles/vuetify/settings.scss",
+      },
+    }),
+  ],
 });
