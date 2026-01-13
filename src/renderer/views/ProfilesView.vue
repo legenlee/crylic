@@ -1,119 +1,202 @@
 <script setup lang="ts">
-import CreateProfileDialog from "../dialogs/CreateProfileDialog.vue";
+import { shallowRef } from "vue";
 
-const profiles = [
-  {
-    name: "Test Profile",
-    version: "1.21.10",
-    modPlatform: "Fabric",
+const rules = {
+  empty: (value: unknown) => {
+    if (!value) {
+      return "This field cannot be empty.";
+    }
+
+    if (typeof value === "string" && value.length === 0) {
+      return "This field cannot be empty.";
+    }
+
+    return true;
   },
-  {
-    name: "Test Profile",
-    version: "1.16.5",
-    modPlatform: "Forge",
+  integer: (value: string) => {
+    const pattern = /^\d+$/;
+
+    if (!pattern.test(value)) {
+      return "Value must be a integer number.";
+    }
+
+    return true;
   },
-  {
-    name: "Test Profile",
-    version: "1.21.10",
+  notSameOrUnderMinMemory: (value: string) => {
+    if (parseInt(value) <= minMemory.value) {
+      return "Maximum Memory cannot be same or under the Minimum Memory.";
+    }
+
+    return true;
   },
-  {
-    name: "Test Profile",
-    version: "1.21.1",
-    modPlatform: "Fabric",
+  notSameOrUpperMaxMemory: (value: string) => {
+    if (parseInt(value) >= maxMemory.value) {
+      return "Minimum Memory cannot be same or under the Maximum Memory.";
+    }
+
+    return true;
   },
-  {
-    name: "Test Profile",
-    version: "1.21.9",
-    modPlatform: "Fabric",
-  },
-  {
-    name: "Test Profile",
-    version: "1.21.10",
-  },
-  {
-    name: "Test Profile",
-    version: "1.21.1",
-    modPlatform: "NeoForge",
-  },
-  {
-    name: "Test Profile",
-    version: "1.21.10",
-    modPlatform: "Quilt",
-  },
-  {
-    name: "Test Profile",
-    version: "1.20.4",
-    modPlatform: "Fabric",
-  },
-  {
-    name: "Test Profile",
-    version: "1.21.1",
-    modPlatform: "Forge",
-  },
-];
+};
+
+const minMemory = shallowRef(2);
+const maxMemory = shallowRef(4);
 </script>
 
 <template>
-  <VContainer>
-    <div class="mb-4 d-flex align-start ga-2">
-      <VTextField
-        flat
-        variant="solo-filled"
-        label="Profile Name"
-        prepend-inner-icon="mdi-magnify"
-        rounded="xl"
-        max-width="400"
-        hide-details
-        density="comfortable"
-      />
+  <div class="d-flex align-center justify-center">
+    <VSheet class="px-6 py-4" rounded="xl">
+      <div>No profiles found. Would you like to create your first profile?</div>
+    </VSheet>
 
-      <VSelect
-        flat
-        variant="solo-filled"
-        label="Sort by:"
-        rounded="xl"
-        max-width="200"
-        density="comfortable"
-        hide-details
-        :items="['Name', 'Last Played']"
-      />
-    </div>
+    <VDialog scrollable width="70%" height="70%">
+      <template #activator="{ props }">
+        <VFab app v-bind="props" prepend-icon="mdi-plus" size="large">
+          Create
+        </VFab>
+      </template>
 
-    <VRow>
-      <VCol v-for="(profile, index) in profiles" :key="index" md="4" lg="3">
-        <VCard variant="tonal" rounded="xl">
-          <div class="d-flex">
-            <div class="align-self-center">
-              <VAvatar border class="my-4 ml-4" rounded="lg" size="48">
-                <VImg></VImg>
-              </VAvatar>
+      <template #default="{ isActive }">
+        <VCard>
+          <VCardTitle>Create Profile</VCardTitle>
+          <VCardText>
+            <VDivider>
+              <span class="text-subtitle-2 text-medium-emphasis">General</span>
+            </VDivider>
+
+            <div class="py-4">
+              <VRow>
+                <VCol cols="6">
+                  <VTextField
+                    hide-details="auto"
+                    label="Name"
+                    variant="filled"
+                    :rules="[rules.empty]"
+                  />
+                </VCol>
+
+                <VCol cols="3">
+                  <VTextField
+                    v-model="minMemory"
+                    hide-details="auto"
+                    label="Minimum Menory"
+                    variant="filled"
+                    suffix="GB"
+                    :rules="[
+                      rules.empty,
+                      rules.integer,
+                      rules.notSameOrUpperMaxMemory,
+                    ]"
+                  />
+                </VCol>
+
+                <VCol cols="3">
+                  <VTextField
+                    v-model="maxMemory"
+                    hide-details="auto"
+                    label="Maximum Memory"
+                    variant="filled"
+                    suffix="GB"
+                    :rules="[
+                      rules.empty,
+                      rules.integer,
+                      rules.notSameOrUnderMinMemory,
+                    ]"
+                  />
+                </VCol>
+              </VRow>
+
+              <VRow>
+                <VCol cols="12">
+                  <VSelect hide-details label="Version" variant="filled">
+                    <template #append>
+                      <VBtn
+                        class="text-none"
+                        variant="tonal"
+                        prepend-icon="mdi-refresh"
+                      >
+                        Refresh
+                      </VBtn>
+                    </template>
+                  </VSelect>
+                </VCol>
+              </VRow>
+
+              <VRow>
+                <VCol cols="12">
+                  <VTextField
+                    persistent-hint
+                    label="Profile Location"
+                    variant="filled"
+                    hint="If empty, Profile uses default Profile Location."
+                  >
+                    <template #append-inner>
+                      <VBtn size="small" variant="tonal">Browse</VBtn>
+                    </template>
+                  </VTextField>
+                </VCol>
+              </VRow>
+
+              <VRow>
+                <VCol cols="12">
+                  <VTextField
+                    persistent-hint
+                    hide-details="auto"
+                    label="Java Location"
+                    variant="filled"
+                    hint="If empty, Profile uses default Java Location."
+                  >
+                    <template #append-inner>
+                      <VBtn size="small" variant="tonal">Browse</VBtn>
+                    </template>
+                  </VTextField>
+                </VCol>
+              </VRow>
             </div>
 
-            <div class="flex-fill">
-              <VCardItem>
-                <VCardTitle>
-                  <span>{{ profile.name }}</span>
-                </VCardTitle>
-                <VCardSubtitle v-if="profile.modPlatform">
-                  {{ profile.version }} ({{ profile.modPlatform }})
-                </VCardSubtitle>
-                <VCardSubtitle v-else>{{ profile.version }}</VCardSubtitle>
-              </VCardItem>
+            <VDivider>
+              <span class="text-subtitle-2 text-medium-emphasis">Advanced</span>
+            </VDivider>
+
+            <div class="py-4">
+              <VAlert
+                closable
+                border="start"
+                color="warning"
+                icon="mdi-alert-circle-outline"
+                variant="outlined"
+              >
+                <template #close="{ props }">
+                  <!-- Remove color utility class to inherit color of the alert component. -->
+                  <VBtn v-bind="props" color="" />
+                </template>
+
+                <VAlertTitle>Sensitive Warning</VAlertTitle>
+                This area contains sensitive fields that could damage the game
+                or your system. <strong>DO NOT</strong> modify these settings
+                unless you fully understand their functions.
+              </VAlert>
+
+              <VRow class="mt-4">
+                <VCol cols="12">
+                  <VTextField
+                    persistent-hint
+                    hide-details="auto"
+                    label="JVM Argument"
+                    variant="filled"
+                    hint="If not empty, Profile ignores Memory allocations above."
+                  />
+                </VCol>
+              </VRow>
             </div>
-          </div>
+          </VCardText>
+
+          <VCardActions>
+            <VSpacer />
+            <VBtn @click="isActive.value = false">Cancel</VBtn>
+            <VBtn variant="elevated" prepend-icon="mdi-plus">Create</VBtn>
+          </VCardActions>
         </VCard>
-      </VCol>
-    </VRow>
-  </VContainer>
-
-  <CreateProfileDialog>
-    <template #default="{ props }">
-      <VFab
-        v-bind="props"
-        prepend-icon="mdi-plus"
-        text="Create new Profile"
-        app
-      />
-    </template>
-  </CreateProfileDialog>
+      </template>
+    </VDialog>
+  </div>
 </template>
