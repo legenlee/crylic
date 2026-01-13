@@ -78,7 +78,7 @@ onUnmounted(() => {
     </VNavigationDrawer>
 
     <VMain scrollable>
-      <VContainer class="fill-height" fluid>
+      <VContainer class="main-container" fluid>
         <RouterView v-slot="{ Component }">
           <VSlideYReverseTransition hide-on-leave>
             <component :is="Component" style="width: 100%; min-height: 100%" />
@@ -92,5 +92,12 @@ onUnmounted(() => {
 <style scoped lang="scss">
 #titlebar {
   -webkit-app-region: drag;
+}
+
+.main-container {
+  min-height: 100%;
+
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
