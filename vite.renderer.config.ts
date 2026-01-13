@@ -12,12 +12,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    vue(),
-    vuetify({
-      styles: {
-        configFile: "src/renderer/styles/vuetify/settings.scss",
-      },
-    }),
-  ],
+  plugins: [vue(), vuetify()],
 });
