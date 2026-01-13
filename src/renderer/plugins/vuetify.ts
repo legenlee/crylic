@@ -17,8 +17,6 @@ import "@mdi/font/css/materialdesignicons.css";
 
 import "vuetify/styles";
 import { createVuetify, ThemeDefinition } from "vuetify";
-import * as components from "vuetify/components";
-import * as directives from "vuetify/directives";
 import { en, ko } from "vuetify/locale";
 import { md3 } from "vuetify/blueprints";
 
@@ -46,13 +44,17 @@ const dark: ThemeDefinition = {
 
 export const vuetify = createVuetify({
   blueprint: md3,
-  components,
   defaults: {
     VBtn: {
       elevation: 0,
     },
+    VCheckbox: {
+      color: "primary",
+    },
+    VCheckboxBtn: {
+      color: "primary",
+    },
   },
-  directives,
   locale: {
     messages: { ko, en },
     fallback: "en",
