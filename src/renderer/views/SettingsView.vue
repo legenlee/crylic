@@ -17,6 +17,13 @@
           System
         </VListItemSubtitle>
       </VListItem>
+
+      <VListItem prepend-icon="mdi-folder" value="shareDirectory">
+        <VListItemTitle>Profiles Location</VListItemTitle>
+        <VListItemSubtitle class="text-primary-darken-1">
+          path/to/profiles/location
+        </VListItemSubtitle>
+      </VListItem>
     </VList>
 
     <VList rounded="xl" lines="two">
@@ -58,18 +65,17 @@
           Sets minimum and maximum memory allocation.
         </VListItemSubtitle>
       </VListItem>
+    </VList>
 
-      <VListItem prepend-icon="mdi-share-variant" value="shareDirectory">
-        <VListItemTitle>Share Game Directory</VListItemTitle>
-        <VListItemSubtitle>
-          Shares same folder between different game profiles.
-        </VListItemSubtitle>
-        <template #append="{ isSelected, select }">
-          <VListItemAction end>
-            <VCheckboxBtn
-              :model-value="isSelected"
-              @update:model-value="select"
-            />
+    <VList rounded="xl" lines="two">
+      <VListSubheader title="Experimental" />
+      <VListItem disabled link>
+        <VListItemTitle>Material You</VListItemTitle>
+        <VListItemSubtitle>Enjoy Your beloved theme.</VListItemSubtitle>
+
+        <template #append>
+          <VListItemAction>
+            <VSwitch hide-details density="compact"></VSwitch>
           </VListItemAction>
         </template>
       </VListItem>
