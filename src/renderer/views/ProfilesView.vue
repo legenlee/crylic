@@ -13,24 +13,31 @@ const rules = {
 
     return true;
   },
-  integer: (value: string) => {
-    const pattern = /^\d+$/;
+  integer: (value: unknown) => {
+    const pattern = /^-?\d+$/;
 
-    if (!pattern.test(value)) {
+    if (typeof value === "string" && value.length > 0 && !pattern.test(value)) {
       return "Value must be a integer number.";
     }
 
     return true;
   },
+  greaterThanZero: (value: unknown) => {
+    if (typeof value === "string" && value.length > 0 && Number(value) <= 0) {
+      return "Value must greater than 0.";
+    }
+
+    return true;
+  },
   notSameOrUnderMinMemory: (value: string) => {
-    if (parseInt(value) <= minMemory.value) {
+    if (parseInt(value) <= parseInt(minMemory.value)) {
       return "Maximum Memory cannot be same or under the Minimum Memory.";
     }
 
     return true;
   },
   notSameOrUpperMaxMemory: (value: string) => {
-    if (parseInt(value) >= maxMemory.value) {
+    if (parseInt(value) >= parseInt(maxMemory.value)) {
       return "Minimum Memory cannot be same or under the Maximum Memory.";
     }
 
@@ -38,19 +45,25 @@ const rules = {
   },
 };
 
-const minMemory = shallowRef(2);
-const maxMemory = shallowRef(4);
+const minMemory = shallowRef("");
+const maxMemory = shallowRef("");
 </script>
 
 <template>
-  <div class="d-flex align-center justify-center">
+  <div class="d-flex flex-column flex-wrap align-center justify-center">
     <VSheet class="px-6 py-4" rounded="xl">
       <div>No profiles found. Would you like to create your first profile?</div>
     </VSheet>
 
     <VDialog scrollable width="70%" height="70%">
       <template #activator="{ props }">
-        <VFab app v-bind="props" prepend-icon="mdi-plus" size="large">
+        <VFab
+          app
+          v-bind="props"
+          prepend-icon="mdi-plus"
+          size="large"
+          rounded="lg"
+        >
           Create
         </VFab>
       </template>
@@ -79,11 +92,13 @@ const maxMemory = shallowRef(4);
                     v-model="minMemory"
                     hide-details="auto"
                     label="Minimum Menory"
-                    variant="filled"
                     suffix="GB"
+                    type="number"
+                    variant="filled"
                     :rules="[
                       rules.empty,
                       rules.integer,
+                      rules.greaterThanZero,
                       rules.notSameOrUpperMaxMemory,
                     ]"
                   />
@@ -94,11 +109,13 @@ const maxMemory = shallowRef(4);
                     v-model="maxMemory"
                     hide-details="auto"
                     label="Maximum Memory"
-                    variant="filled"
                     suffix="GB"
+                    type="number"
+                    variant="filled"
                     :rules="[
                       rules.empty,
                       rules.integer,
+                      rules.greaterThanZero,
                       rules.notSameOrUnderMinMemory,
                     ]"
                   />
@@ -141,9 +158,9 @@ const maxMemory = shallowRef(4);
                   <VTextField
                     persistent-hint
                     hide-details="auto"
+                    hint="If empty, Profile uses default Java Location."
                     label="Java Location"
                     variant="filled"
-                    hint="If empty, Profile uses default Java Location."
                   >
                     <template #append-inner>
                       <VBtn size="small" variant="tonal">Browse</VBtn>
@@ -181,9 +198,9 @@ const maxMemory = shallowRef(4);
                   <VTextField
                     persistent-hint
                     hide-details="auto"
+                    hint="If not empty, Profile ignores Memory allocations above."
                     label="JVM Argument"
                     variant="filled"
-                    hint="If not empty, Profile ignores Memory allocations above."
                   />
                 </VCol>
               </VRow>
@@ -200,3 +217,5 @@ const maxMemory = shallowRef(4);
     </VDialog>
   </div>
 </template>
+
+<style scoped lang="scss"></style>
