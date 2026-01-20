@@ -2,11 +2,7 @@ import path from "node:path";
 import cp from "node:child_process";
 
 import { CURRENT_OS } from "../../constants";
-import {
-  MinecraftLibrary,
-  MinecraftRule,
-  MinecraftVersionDetail,
-} from "./types";
+import { MinecraftRule, MinecraftVersionDetail } from "./types";
 
 export interface LaunchOptions {
   assetsPath?: string;
