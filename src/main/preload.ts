@@ -1,13 +1,16 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { IPC_TWO_WAY_CHANNELS } from "../constants";
+import { IpcCommonChannels, ipcRendererInvoke } from "./common/ipc";
+import { MinecraftVersionDetail } from "./common/minecraft/types";
 
-const manifest = {
-  getVersions: () =>
-    ipcRenderer.invoke(IPC_TWO_WAY_CHANNELS.METADATA_GET_VERSIONS),
-  getCachedVersions: () =>
-    ipcRenderer.invoke(IPC_TWO_WAY_CHANNELS.METADATA_GET_CACHED_VERSIONS),
+const api = {
+  minecraft: {
+    install: (version: string) =>
+      ipcRendererInvoke(IpcCommonChannels.MINECRAFT_INSTALL, version),
+    launch: (version: MinecraftVersionDetail) =>
+      ipcRendererInvoke(IpcCommonChannels.MINECRAFT_LAUNCH, version),
+  },
 };
 
-contextBridge.exposeInMainWorld("main", {
-  manifest,
-});
+ipcRenderer.on("debug", (_, args) => console.log(args));
+
+contextBridge.exposeInMainWorld("api", api);
