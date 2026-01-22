@@ -1,7 +1,9 @@
+import { numberPattern, integerPattern, decimalPattern } from "./patterns";
+
 type RulesObject = { [key: string]: Validator };
 type Validator = (value: unknown, errorMessage?: string) => string | boolean;
 
-export const CommonRules: RulesObject = {
+export const commonRules: RulesObject = {
   empty(value, errorMessage = "Value cannot be empty.") {
     if (!value) {
       return errorMessage;
@@ -10,13 +12,11 @@ export const CommonRules: RulesObject = {
     return true;
   },
   number(value, errorMessage = "Value must be a number.") {
-    const numberPattern = /^[0-9]+?.?[0-9]+$/;
-
-    if (typeof value === "number") {
+    if (typeof value === "string" && numberPattern.test(value)) {
       return true;
     }
 
-    if (typeof value === "string" && numberPattern.test(value)) {
+    if (typeof value === "number") {
       return true;
     }
 
@@ -24,10 +24,8 @@ export const CommonRules: RulesObject = {
   },
 };
 
-export const NumberRules: RulesObject = {
+export const numberRules: RulesObject = {
   integer(value, errorMessage = "Value must be a integer") {
-    const integerPattern = /^[0-9]+$/;
-
     if (typeof value === "string" && integerPattern.test(value)) {
       return true;
     }
@@ -38,5 +36,15 @@ export const NumberRules: RulesObject = {
 
     return errorMessage;
   },
-  decimal(value, errorMessage = "Value must be a decimal") {},
+  decimal(value, errorMessage = "Value must be a decimal") {
+    if (typeof value === "string" && decimalPattern.test(value)) {
+      return true;
+    }
+
+    if (typeof value === "number" && value % 1 !== 0) {
+      return true;
+    }
+
+    return errorMessage;
+  },
 };
