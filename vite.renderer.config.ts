@@ -6,8 +6,8 @@ import vuetify from "vite-plugin-vuetify";
 export default defineConfig({
   css: {
     preprocessorOptions: {
-      sass: {
-        api: "modern-compiler",
+      scss: {
+        api: "modern",
         quietDeps: true,
       },
     },
