@@ -4,7 +4,7 @@ type RulesObject = { [key: string]: Validator };
 type Validator = (value: unknown, errorMessage?: string) => string | boolean;
 
 export const commonRules: RulesObject = {
-  empty(value, errorMessage = "Value cannot be empty.") {
+  notEmpty(value, errorMessage = "Value cannot be empty.") {
     if (!value) {
       return errorMessage;
     }
