@@ -9,7 +9,7 @@ export const CommonRules: RulesObject = {
 
     return true;
   },
-  isNumber(value, errorMessage = "Value must be a number.") {
+  number(value, errorMessage = "Value must be a number.") {
     const numberPattern = /^[0-9]+?.?[0-9]+$/;
 
     if (typeof value === "number") {
@@ -24,6 +24,19 @@ export const CommonRules: RulesObject = {
   },
 };
 
-export const NumberRules: RulesObject = {};
+export const NumberRules: RulesObject = {
+  integer(value, errorMessage = "Value must be a integer") {
+    const integerPattern = /^[0-9]+$/;
 
-export const IntegerRules: RulesObject = {};
+    if (typeof value === "string" && integerPattern.test(value)) {
+      return true;
+    }
+
+    if (typeof value === "number" && Number.isInteger(value)) {
+      return true;
+    }
+
+    return errorMessage;
+  },
+  decimal(value, errorMessage = "Value must be a decimal") {},
+};
