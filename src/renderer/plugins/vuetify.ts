@@ -54,6 +54,11 @@ export const vuetify = createVuetify({
     VCheckboxBtn: {
       color: "primary",
     },
+    VDialog: {
+      scrollable: true,
+      width: "70%",
+      height: "70%",
+    },
   },
   locale: {
     messages: { ko, en },
