@@ -1,5 +1,9 @@
 import { RouteRecordRaw } from "vue-router";
 
+import ProfilesView from "./views/ProfilesView.vue";
+import ProfileDetailView from "./views/ProfileDetailView.vue";
+import SettingsView from "./views/SettingsView.vue";
+
 export enum RouteNames {
   INIT = "init",
   PROFILES = "profiles",
@@ -19,16 +23,16 @@ export const routes: RouteRecordRaw[] = [
   {
     name: RouteNames.PROFILES,
     path: "/profiles",
-    component: () => import("./views/ProfilesView.vue"),
+    component: ProfilesView,
   },
   {
     name: RouteNames.PROFILE_DETAIL,
     path: "/profiles/:id",
-    component: () => import("./views/ProfileDetailView.vue"),
+    component: ProfileDetailView,
   },
   {
     name: RouteNames.SETTINGS,
     path: "/settings",
-    component: () => import("./views/SettingsView.vue"),
+    component: SettingsView,
   },
 ];
