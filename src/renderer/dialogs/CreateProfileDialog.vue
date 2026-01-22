@@ -12,7 +12,7 @@ interface ProfileForm {
   jvmArgument: string;
 }
 
-const visibie = shallowRef(false);
+const valid = shallowRef(false);
 
 const defaultFormValue = Object.freeze<ProfileForm>({
   name: "",
@@ -23,21 +23,22 @@ const defaultFormValue = Object.freeze<ProfileForm>({
   maximumMemory: 4,
   jvmArgument: "",
 });
+
 const form = ref<ProfileForm>({
   ...defaultFormValue,
 });
-const valid = shallowRef(false);
 
 const resetForm = () => {
   Object.assign(form.value, defaultFormValue);
 };
+
+const visibie = shallowRef(false);
 
 const create = () => {
   if (!valid.value) {
     return;
   }
 
-  console.log("Created");
   visibie.value = false;
 };
 </script>
@@ -112,11 +113,7 @@ const create = () => {
                     :rules="[commonRules.notEmpty]"
                   >
                     <template #append>
-                      <VBtn
-                        class="text-none"
-                        variant="tonal"
-                        prepend-icon="mdi-refresh"
-                      >
+                      <VBtn variant="tonal" prepend-icon="mdi-refresh">
                         Refresh
                       </VBtn>
                     </template>
