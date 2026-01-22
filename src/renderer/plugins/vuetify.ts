@@ -59,6 +59,11 @@ export const vuetify = createVuetify({
       width: "70%",
       height: "70%",
     },
+    VSwitch: {
+      color: "primary",
+      inset: true,
+      trueIcon: "mdi-check",
+    },
   },
   locale: {
     messages: { ko, en },
