@@ -1,10 +1,21 @@
-import { numberPattern, integerPattern, decimalPattern } from "./patterns";
+import {
+  numberPattern,
+  integerPattern,
+  decimalPattern,
+  positiveNumberPattern,
+  negativeNumberPattern,
+} from "./patterns";
 
-type RulesObject = { [key: string]: Validator };
 type Validator = (value: unknown, errorMessage?: string) => string | boolean;
 
-export const commonRules: RulesObject = {
-  notEmpty(value, errorMessage = "Value cannot be empty.") {
+type CommonRules = Record<"notEmpty" | "number", Validator>;
+type NumberRules = Record<
+  "integer" | "decimal" | "positive" | "negative" | "zero",
+  Validator
+>;
+
+export const commonRules: CommonRules = {
+  notEmpty: (value, errorMessage = "This field cannot be empty.") => {
     if (!value) {
       return errorMessage;
     }
@@ -15,7 +26,7 @@ export const commonRules: RulesObject = {
 
     return true;
   },
-  number(value, errorMessage = "Value must be a number.") {
+  number(value, errorMessage = "This field must be a number.") {
     if (typeof value === "string" && numberPattern.test(value)) {
       return true;
     }
@@ -28,8 +39,8 @@ export const commonRules: RulesObject = {
   },
 };
 
-export const numberRules: RulesObject = {
-  integer(value, errorMessage = "Value must be a integer") {
+export const numberRules: NumberRules = {
+  integer(value, errorMessage = "This field must be a integer.") {
     if (typeof value === "string" && integerPattern.test(value)) {
       return true;
     }
@@ -40,12 +51,45 @@ export const numberRules: RulesObject = {
 
     return errorMessage;
   },
-  decimal(value, errorMessage = "Value must be a decimal") {
+  decimal(value, errorMessage = "This field must be a decimal.") {
     if (typeof value === "string" && decimalPattern.test(value)) {
       return true;
     }
 
     if (typeof value === "number" && value % 1 !== 0) {
+      return true;
+    }
+
+    return errorMessage;
+  },
+  positive(value, errorMessage = "This field must be a positive number.") {
+    if (typeof value === "string" && positiveNumberPattern.test(value)) {
+      return true;
+    }
+
+    if (typeof value === "number" && value > 0) {
+      return true;
+    }
+
+    return errorMessage;
+  },
+  negative(value, errorMessage = "This field must be a negative number.") {
+    if (typeof value === "string" && negativeNumberPattern.test(value)) {
+      return true;
+    }
+
+    if (typeof value === "number" && value < 0) {
+      return true;
+    }
+
+    return errorMessage;
+  },
+  zero(value, errorMessage = "This field must be the zero.") {
+    if (typeof value === "string" && value === "0") {
+      return true;
+    }
+
+    if (typeof value === "number" && value === 0) {
       return true;
     }
 
