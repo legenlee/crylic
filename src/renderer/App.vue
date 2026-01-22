@@ -89,6 +89,35 @@ onUnmounted(() => {
   </VApp>
 </template>
 
+<style lang="scss">
+html {
+  overflow-y: unset;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 24px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(211, 211, 211, 45%);
+  background-clip: padding-box;
+  border: 8px solid transparent;
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(211, 211, 211, 60%);
+  background-clip: padding-box;
+  border: 8px solid transparent;
+  border-radius: 12px;
+}
+</style>
+
 <style scoped lang="scss">
 #titlebar {
   -webkit-app-region: drag;
