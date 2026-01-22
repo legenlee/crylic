@@ -9,6 +9,10 @@ export const commonRules: RulesObject = {
       return errorMessage;
     }
 
+    if (typeof value === "string" && value.length === 0) {
+      return errorMessage;
+    }
+
     return true;
   },
   number(value, errorMessage = "Value must be a number.") {
