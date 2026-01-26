@@ -9,12 +9,21 @@ export default defineConfig({
       sass: {
         api: "modern",
         quietDeps: true,
+        silenceDeprecations: ["if-function"],
       },
       scss: {
         api: "modern",
         quietDeps: true,
+        silenceDeprecations: ["if-function"],
       },
     },
   },
-  plugins: [vue(), vuetify()],
+  plugins: [
+    vue(),
+    vuetify({
+      styles: {
+        configFile: "src/renderer/styles/settings.scss",
+      },
+    }),
+  ],
 });
