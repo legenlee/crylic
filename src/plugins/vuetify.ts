@@ -1,4 +1,4 @@
-import "vuetify/styles";
+import "vuetify/styles/main.css";
 import { createVuetify } from "vuetify";
 import { md3 } from "vuetify/blueprints";
 
