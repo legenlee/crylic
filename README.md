@@ -8,26 +8,12 @@ Nozomi is a custom Minecraft launcher.
 
 - [Node.js](https://nodejs.org) v24.11 (Runtime)
 - [Visual Studio Code](https://code.visualstudio.com/) (Editor)
-- Yarn (Package manager)
+- pnpm (Package manager)
 
 ### Required Visual Studio Code extensions
 
 - [Vue](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-
-### Test run
-
-Install the required libraries with:
-
-```
-yarn
-```
-
-After the libraries are installed, run in the test environment with:
-
-```
-yarn start
-```
 
 ## License
 
