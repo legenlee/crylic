@@ -1,3 +1,3 @@
-# Nozomi UI
+# Nozomi Core
 
 Currently in develop.

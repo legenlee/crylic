@@ -1,3 +1,3 @@
-# Nozomi UI
+# Nozomi Electron
 
 Currently in develop.
