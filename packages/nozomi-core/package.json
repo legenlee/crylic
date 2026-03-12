@@ -1,0 +1,7 @@
+{
+  "name": "@nozomi/core",
+  "packageManager": "pnpm@10.32.1",
+  "type": "module",
+  "main": "index.ts"
+}
+
