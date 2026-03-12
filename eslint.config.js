@@ -5,12 +5,10 @@ import eslintPluginVue from "eslint-plugin-vue";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default defineConfig(
+  eslint.configs.recommended,
+  typescriptEslint.configs.strict,
+  eslintPluginVue.configs["flat/recommended"],
   {
-    extends: [
-      eslint.configs.recommended,
-      ...typescriptEslint.configs.strict,
-      ...eslintPluginVue.configs["flat/recommended"],
-    ],
     languageOptions: {
       parserOptions: {
         parser: typescriptEslint.parser,
