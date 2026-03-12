@@ -1,0 +1,7 @@
+packages:
+  - "packages/nozomi-core"
+  - "packages/nozomi-electron"
+  - "packages/nozomi-ui"
+allowBuilds:
+  electron: true
+  esbuild: true
