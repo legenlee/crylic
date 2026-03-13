@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouteNames } from "../../plugins/router";
+import { MAIN_ROUTE_NAMES } from "../../constants/route";
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import { RouteNames } from "../../plugins/router";
       <VBtn
         color="primary"
         variant="tonal"
-        :to="{ name: RouteNames.Home, replace: true }"
+        :to="{ name: MAIN_ROUTE_NAMES.home, replace: true }"
       >
         Back to the Home
       </VBtn>
