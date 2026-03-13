@@ -3,31 +3,33 @@ import { NAVIGATION_DRAWER } from "../constants/navigation";
 </script>
 
 <template>
-  <VNavigationDrawer
-    rail
-    expand-on-hover
-    permanent
-  >
-    <VList
-      color="primary"
-      :items="NAVIGATION_DRAWER.default"
-      nav
-    />
-
-    <template #append>
+  <VLayout>
+    <VNavigationDrawer
+      rail
+      expand-on-hover
+      permanent
+    >
       <VList
         color="primary"
-        :items="NAVIGATION_DRAWER.append"
+        :items="NAVIGATION_DRAWER.default"
         nav
       />
-    </template>
-  </VNavigationDrawer>
 
-  <VMain scrollable>
-    <RouterView v-slot="{ Component }">
-      <VSlideXReverseTransition hide-on-leave>
-        <component :is="Component" />
-      </VSlideXReverseTransition>
-    </RouterView>
-  </VMain>
+      <template #append>
+        <VList
+          color="primary"
+          :items="NAVIGATION_DRAWER.append"
+          nav
+        />
+      </template>
+    </VNavigationDrawer>
+
+    <VMain scrollable>
+      <RouterView v-slot="{ Component }">
+        <VSlideXReverseTransition hide-on-leave>
+          <component :is="Component" />
+        </VSlideXReverseTransition>
+      </RouterView>
+    </VMain>
+  </VLayout>
 </template>
