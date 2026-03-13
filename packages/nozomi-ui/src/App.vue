@@ -4,6 +4,12 @@
 
 <template>
   <VApp>
-    <RouterView />
+    <RouterView>
+      <template #default="{ Component }">
+        <VSlideYReverseTransition leave-absolute>
+          <component :is="Component" />
+        </VSlideYReverseTransition>
+      </template>
+    </RouterView>
   </VApp>
 </template>

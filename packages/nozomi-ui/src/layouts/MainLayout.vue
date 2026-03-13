@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouteNames } from "../plugins/router";
+import { NAVIGATION_DRAWER } from "../constants/navigation";
 </script>
 
 <template>
@@ -10,47 +10,24 @@ import { RouteNames } from "../plugins/router";
   >
     <VList
       color="primary"
+      :items="NAVIGATION_DRAWER.default"
       nav
-    >
-      <VListItem
-        density="compact"
-        prepend-icon="mdi-bookshelf"
-        title="Library"
-        :to="{ name: RouteNames.Home }"
-        exact
-      />
-      <VListItem
-        density="compact"
-        prepend-icon="mdi-bookshelf"
-        title="Library"
-        :to="{ name: RouteNames.Detail, params: { id: 10 } }"
-        exact
-      />
-    </VList>
+    />
 
     <template #append>
       <VList
         color="primary"
+        :items="NAVIGATION_DRAWER.append"
         nav
-      >
-        <VListItem
-          density="compact"
-          prepend-icon="mdi-cog"
-          title="Settings"
-          to=""
-          exact
-        />
-      </VList>
+      />
     </template>
   </VNavigationDrawer>
 
   <VMain scrollable>
-    <VContainer fluid>
-      <RouterView v-slot="{ Component }">
-        <VSlideXReverseTransition hide-on-leave>
-          <component :is="Component" />
-        </VSlideXReverseTransition>
-      </RouterView>
-    </VContainer>
+    <RouterView v-slot="{ Component }">
+      <VSlideXReverseTransition hide-on-leave>
+        <component :is="Component" />
+      </VSlideXReverseTransition>
+    </RouterView>
   </VMain>
 </template>

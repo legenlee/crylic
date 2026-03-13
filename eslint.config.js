@@ -9,6 +9,7 @@ export default defineConfig(
   typescriptEslint.configs.strict,
   eslintPluginVue.configs["flat/recommended"],
   {
+    ignores: ["eslint.config.js"],
     languageOptions: {
       parserOptions: {
         parser: typescriptEslint.parser,
