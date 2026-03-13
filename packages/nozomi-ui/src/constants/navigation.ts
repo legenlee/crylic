@@ -11,7 +11,7 @@ type MenuItem = {
 const menuProps = {
   density: "compact",
   exact: true,
-};
+} as const;
 
 const menuItemMapper = (m: MenuItem) => {
   return {
