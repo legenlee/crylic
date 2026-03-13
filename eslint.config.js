@@ -1,4 +1,5 @@
 import { defineConfig } from "eslint/config";
+import globals from "globals";
 import eslint from "@eslint/js";
 import typescriptEslint from "typescript-eslint";
 import eslintPluginVue from "eslint-plugin-vue";
@@ -11,6 +12,9 @@ export default defineConfig(
   {
     ignores: ["eslint.config.js"],
     languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
       parserOptions: {
         parser: typescriptEslint.parser,
       },

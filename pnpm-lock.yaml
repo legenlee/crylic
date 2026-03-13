@@ -23,6 +23,9 @@ importers:
       eslint-plugin-vue:
         specifier: ^10.8.0
         version: 10.8.0(@typescript-eslint/parser@8.57.0(eslint@10.0.3)(typescript@5.9.3))(eslint@10.0.3)(vue-eslint-parser@10.4.0(eslint@10.0.3))
+      globals:
+        specifier: ^17.4.0
+        version: 17.4.0
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
@@ -943,6 +946,10 @@ packages:
   global-agent@3.0.0:
     resolution: {integrity: sha512-PT6XReJ+D07JvGoxQMkT6qji/jVNfX/h364XHZOWeRzy64sSFr+xJ5OX7LI3b4MPQzdL4H8Y8M0xzPpsVMwA8Q==}
     engines: {node: '>=10.0'}
+
+  globals@17.4.0:
+    resolution: {integrity: sha512-hjrNztw/VajQwOLsMNT1cbJiH2muO3OROCHnbehc8eY5JyD2gqz4AcMHPqgaOR59DjgUjYAYLeH699g/eWi2jw==}
+    engines: {node: '>=18'}
 
   globalthis@1.0.4:
     resolution: {integrity: sha512-DpLKbNU4WylpxJykQujfCcwYWiV/Jhm50Goo0wrVILAv5jOr9d+H+UR3PhSCD2rCCEIg0uc+G+muBTwD54JhDQ==}
@@ -2291,6 +2298,8 @@ snapshots:
       semver: 7.7.4
       serialize-error: 7.0.1
     optional: true
+
+  globals@17.4.0: {}
 
   globalthis@1.0.4:
     dependencies:
