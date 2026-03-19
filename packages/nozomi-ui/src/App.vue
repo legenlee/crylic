@@ -9,10 +9,13 @@ import SystemBar from "./components/layout/SystemBar.vue";
     <SystemBar />
 
     <VMain>
-      <RouterView class="fill-height">
+      <RouterView>
         <template #default="{ Component }">
           <VSlideYReverseTransition leave-absolute>
-            <component :is="Component" />
+            <component
+              :is="Component"
+              class="fill-height"
+            />
           </VSlideYReverseTransition>
         </template>
       </RouterView>

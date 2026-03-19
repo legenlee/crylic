@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
+import { MAIN_ROUTE_NAMES } from "../../constants/route";
 
 const props = defineProps<{
   profileId: string;
@@ -18,9 +19,15 @@ const subtitleText = computed(
   <VCard
     class="d-flex"
     rounded="lg"
+    :to="{
+      name: MAIN_ROUTE_NAMES.detail,
+      params: {
+        id: props.profileId,
+      },
+    }"
   >
     <VAvatar
-      color="red"
+      color="primary"
       size="64"
       tile
     >

@@ -50,14 +50,13 @@ const toggleDrawer = () => {
     </VNavigationDrawer>
 
     <VMain scrollable>
-      <RouterView v-slot="{ Component }">
-        <VSlideXReverseTransition hide-on-leave>
-          <component
-            :is="Component"
-            class="bg-background rounded-t-xl"
-          />
-        </VSlideXReverseTransition>
-      </RouterView>
+      <VContainer class="fill-height bg-background rounded-t-xl">
+        <RouterView v-slot="{ Component }">
+          <VSlideYReverseTransition hide-on-leave>
+            <component :is="Component" />
+          </VSlideYReverseTransition>
+        </RouterView>
+      </VContainer>
     </VMain>
   </VLayout>
 </template>
