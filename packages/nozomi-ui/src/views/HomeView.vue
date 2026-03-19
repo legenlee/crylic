@@ -11,13 +11,13 @@ import { profiles } from "../constants/dummy";
     <VLayout class="fill-height">
       <VAppBar
         density="comfortable"
-        rounded="lg"
+        rounded="xl"
       >
         <template #prepend>
           <VBtn
             class="ml-2 text-medium-emphasis"
             prepend-icon="mdi-magnify"
-            rounded="lg"
+            rounded="xl"
             variant="flat"
           >
             <span>Search...</span>

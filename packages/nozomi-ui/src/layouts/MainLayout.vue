@@ -11,7 +11,7 @@ const toggleDrawer = () => {
 </script>
 
 <template>
-  <VLayout>
+  <VLayout class="bg-surface">
     <VAppBar color="transparent">
       <template #prepend>
         <VBtn
@@ -27,6 +27,11 @@ const toggleDrawer = () => {
           :to="{
             name: SETTINGS_ROUTE_NAMES.settings,
           }"
+          variant="plain"
+        />
+
+        <VBtn
+          icon="mdi-account-circle"
           variant="plain"
         />
       </template>
@@ -49,7 +54,7 @@ const toggleDrawer = () => {
         <VSlideXReverseTransition hide-on-leave>
           <component
             :is="Component"
-            class="bg-surface rounded-t-xl"
+            class="bg-background rounded-t-xl"
           />
         </VSlideXReverseTransition>
       </RouterView>

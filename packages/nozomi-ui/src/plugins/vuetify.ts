@@ -23,9 +23,6 @@ export const vuetify = createVuetify({
     global: {
       elevation: 0,
     },
-    VCard: {
-      variant: "tonal",
-    },
   },
   icons: {
     defaultSet: "mdi",
@@ -34,12 +31,7 @@ export const vuetify = createVuetify({
     themes: {
       light: {
         colors: {
-          surface: colors.grey.lighten5,
-        },
-      },
-      dark: {
-        colors: {
-          surface: colors.grey.darken4,
+          surface: colors.grey.lighten4,
         },
       },
     },
