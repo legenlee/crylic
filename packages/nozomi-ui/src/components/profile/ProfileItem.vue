@@ -46,6 +46,7 @@ const subtitleText = computed(
       icon="mdi-play"
       size="small"
       variant="tonal"
+      @click.prevent
     />
   </VCard>
 </template>
