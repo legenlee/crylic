@@ -16,9 +16,32 @@ import "@fontsource/roboto/900-italic.css";
 import "@mdi/font/css/materialdesignicons.css";
 
 import { createVuetify } from "vuetify";
+import colors from "vuetify/util/colors";
 
 export const vuetify = createVuetify({
+  defaults: {
+    global: {
+      elevation: 0,
+    },
+    VCard: {
+      variant: "tonal",
+    },
+  },
   icons: {
     defaultSet: "mdi",
+  },
+  theme: {
+    themes: {
+      light: {
+        colors: {
+          surface: colors.grey.lighten5,
+        },
+      },
+      dark: {
+        colors: {
+          surface: colors.grey.darken4,
+        },
+      },
+    },
   },
 });

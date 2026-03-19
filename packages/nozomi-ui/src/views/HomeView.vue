@@ -4,7 +4,10 @@ import { profiles } from "../constants/dummy";
 </script>
 
 <template>
-  <VContainer class="fill-height">
+  <VContainer
+    class="fill-height"
+    fluid
+  >
     <VLayout class="fill-height">
       <VAppBar
         density="comfortable"
@@ -17,7 +20,7 @@ import { profiles } from "../constants/dummy";
             rounded="lg"
             variant="flat"
           >
-            <span>Search</span>
+            <span>Search...</span>
           </VBtn>
         </template>
       </VAppBar>

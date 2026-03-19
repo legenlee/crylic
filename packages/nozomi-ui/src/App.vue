@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SystemBar from "./components/system/SystemBar.vue";
+import SystemBar from "./components/layout/SystemBar.vue";
 
 // Empty main entry
 </script>
