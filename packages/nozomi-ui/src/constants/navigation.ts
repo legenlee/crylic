@@ -9,6 +9,7 @@ type MenuItem = {
 };
 
 const menuProps = {
+  rounded: "e-pill",
   density: "compact",
   exact: true,
 } as const;
