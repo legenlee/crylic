@@ -30,10 +30,41 @@ const toggleDrawer = () => {
           variant="plain"
         />
 
-        <VBtn
-          icon="mdi-account-circle"
-          variant="plain"
-        />
+        <VMenu>
+          <VCard
+            min-width="200"
+            elevation="3"
+          >
+            <VList
+              class="pt-0"
+              max-height="300"
+            >
+              <VListSubheader sticky>Accounts</VListSubheader>
+              <VListItem
+                v-for="i in 20"
+                :key="i"
+                prepend-icon="mdi-account"
+                :title="`Account ${i}`"
+                subtitle="Microsoft"
+                @click.stop
+              />
+            </VList>
+            <VDivider />
+            <VListItem
+              prepend-icon="mdi-plus"
+              title="Add Account"
+              @click.stop
+            />
+          </VCard>
+
+          <template #activator="{ props }">
+            <VBtn
+              v-bind="props"
+              icon="mdi-account-circle"
+              variant="plain"
+            />
+          </template>
+        </VMenu>
       </template>
     </VAppBar>
 
