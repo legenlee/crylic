@@ -1,4 +1,4 @@
-import "vuetify/styles/main.css";
+import "vuetify/styles";
 
 import "@fontsource/roboto/100.css";
 import "@fontsource/roboto/300.css";
