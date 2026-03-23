@@ -3,9 +3,11 @@
     "target": "es2023",
     "module": "esnext",
 
+    "allowSyntheticDefaultImports": true,
     "noEmit": true,
     "strict": true,
     "noImplicitAny": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "moduleResolution": "node"
   }
 }
