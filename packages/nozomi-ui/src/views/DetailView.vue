@@ -34,10 +34,36 @@ const route = useRoute();
 
       <VSpacer />
 
-      <VBtn
-        icon="mdi-dots-vertical"
-        variant="plain"
-      />
+      <VMenu>
+        <VList>
+          <VListItem
+            title="Verify integrity of Files"
+            prepend-icon="mdi-file-restore"
+            @click="() => {}"
+          />
+
+          <VListItem
+            title="Reveal in File Explorer"
+            prepend-icon="mdi-folder"
+            @click="() => {}"
+          />
+
+          <VListItem
+            class="text-error"
+            title="Delete Profile"
+            prepend-icon="mdi-trash-can"
+            @click="() => {}"
+          />
+        </VList>
+
+        <template #activator="{ props }">
+          <VBtn
+            v-bind="props"
+            icon="mdi-dots-vertical"
+            variant="plain"
+          />
+        </template>
+      </VMenu>
     </div>
 
     <VDivider />
