@@ -35,26 +35,28 @@ const toggleDrawer = () => {
             min-width="200"
             elevation="3"
           >
-            <VList
-              class="pt-0"
-              max-height="300"
-            >
-              <VListSubheader sticky>Accounts</VListSubheader>
+            <VCardTitle>
+              <VListItemSubtitle>Accounts</VListItemSubtitle>
+            </VCardTitle>
+
+            <VCardItem class="pa-0">
+              <VList max-height="300">
+                <VListItem
+                  v-for="i in 20"
+                  :key="i"
+                  prepend-icon="mdi-account"
+                  :title="`Account ${i}`"
+                  subtitle="Microsoft"
+                  @click.stop
+                />
+              </VList>
+              <VDivider />
               <VListItem
-                v-for="i in 20"
-                :key="i"
-                prepend-icon="mdi-account"
-                :title="`Account ${i}`"
-                subtitle="Microsoft"
+                prepend-icon="mdi-plus"
+                title="Add Account"
                 @click.stop
               />
-            </VList>
-            <VDivider />
-            <VListItem
-              prepend-icon="mdi-plus"
-              title="Add Account"
-              @click.stop
-            />
+            </VCardItem>
           </VCard>
 
           <template #activator="{ props }">
