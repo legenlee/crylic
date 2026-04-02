@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es2023",
-    "module": "esnext",
+    "target": "esnext",
+    "module": "commonjs",
 
     "allowSyntheticDefaultImports": true,
+    "composite": true,
     "noEmit": true,
-    "strict": true,
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "noUnusedLocals": true,
-    "moduleResolution": "node"
+    "strict": true,
+    "sourceMap": true,
+    "skipLibCheck": true
   }
 }

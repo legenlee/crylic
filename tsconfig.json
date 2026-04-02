@@ -1,0 +1,8 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/nozomi-core" },
+    { "path": "packages/nozomi-electron" },
+    { "path": "packages/nozomi-ui" }
+  ]
+}

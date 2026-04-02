@@ -9,7 +9,12 @@
     "type": "git",
     "url": "https://github.com/legenlee/nozomi"
   },
-  "type": "module",
+  "type": "commonjs",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "tsc"
+  },
   "dependencies": {
     "electron": "^41.0.0"
   }
