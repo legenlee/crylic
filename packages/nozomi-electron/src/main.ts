@@ -1,5 +1,6 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { app, BrowserWindow } from "electron";
-import { join } from "path";
 
 const WIDTH = 1280;
 const HEIGHT = 720;
@@ -11,7 +12,10 @@ const createWindow = () => {
     height: HEIGHT,
     minHeight: HEIGHT,
     webPreferences: {
-      preload: join(__dirname, "preload.js"),
+      preload: path.join(
+        path.dirname(fileURLToPath(import.meta.url)),
+        "preload.js",
+      ),
     },
   });
 
