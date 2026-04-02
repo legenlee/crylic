@@ -1,4 +1,4 @@
-import { defineConfig } from "eslint/config";
+import { defineConfig, globalIgnores } from "eslint/config";
 import globals from "globals";
 import eslint from "@eslint/js";
 import typescriptEslint from "typescript-eslint";
@@ -6,6 +6,7 @@ import eslintPluginVue from "eslint-plugin-vue";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default defineConfig(
+  globalIgnores(["node_modules", "**/dist", "**/node_modules"]),
   eslint.configs.recommended,
   typescriptEslint.configs.strict,
   eslintPluginVue.configs["flat/recommended"],
