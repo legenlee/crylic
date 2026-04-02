@@ -6,4 +6,3 @@ allowBuilds:
   "@parcel/watcher": true
   electron: true
   esbuild: true
-nodeLinker: hoisted
