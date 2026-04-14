@@ -4,11 +4,16 @@ import vuetify from "vite-plugin-vuetify";
 
 // https://vite.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
   plugins: [
     vue(),
     vuetify({
       styles: {
-        configFile: "src/styles/settings.scss",
+        configFile: "src/app/styles/vuetify/settings.scss",
       },
     }),
   ],
