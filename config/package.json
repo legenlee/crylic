@@ -12,17 +12,14 @@
   },
   "type": "module",
   "devDependencies": {
-    "eslint": "^10.3.0",
+    "eslint": "^10.4.0",
     "prettier": "^3.8.3",
     "typescript-eslint": "^8.59.2"
   },
   "peerDependencies": {
-    "eslint": "^10.3.0",
+    "eslint": "^10.4.0",
     "prettier": "^3.8.3",
-    "typescript-eslint": "^8.59.2"
-  },
-  "dependencies": {
-    "@eslint/js": "^10.0.1"
+    "typescript-eslint": "^8.59.3"
   },
   "exports": {
     ".": "./index.js",

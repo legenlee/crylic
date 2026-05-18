@@ -1,8 +1,4 @@
 packages:
-  - "packages/nozomi-core"
-  - "packages/nozomi-electron"
-  - "packages/nozomi-ui"
-allowBuilds:
-  "@parcel/watcher": true
-  electron: true
-  esbuild: true
+  - "apps/nozomi-electron"
+  - "apps/nozomi-ui"
+  - "config"
