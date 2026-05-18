@@ -9,7 +9,4 @@ export const tsRecommended = defineConfig(
   ts.configs.recommended,
 );
 
-export const tsStrict = defineConfig(
-  js.configs.recommended,
-  ts.configs.recommended,
-);
+export const tsStrict = defineConfig(js.configs.recommended, ts.configs.strict);

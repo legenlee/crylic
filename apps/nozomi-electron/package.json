@@ -1,0 +1,24 @@
+{
+  "name": "@nozomi/electron",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "author": "LegenLee",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/legenlee/nozomi"
+  },
+  "main": "dist/index.js",
+  "scripts": {
+    "electron:start": "electron .",
+    "build": "rolldown --config ./rolldown.config.ts"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@nozomi/config": "workspace:*",
+    "rolldown": "^1.0.1"
+  },
+  "dependencies": {
+    "electron": "^42.1.0"
+  }
+}
