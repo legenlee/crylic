@@ -4,29 +4,21 @@
   "description": "A Minecraft Launcher",
   "author": "LegenLee",
   "license": "Apache-2.0",
-  "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319",
+  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499",
   "repository": {
     "type": "git",
     "url": "https://github.com/legenlee/nozomi"
   },
-  "main": "index.js",
   "type": "module",
-  "scripts": {
-    "core": "pnpm --filter @nozomi/core",
-    "electron": "pnpm --filter @nozomi/electron",
-    "ui": "pnpm --filter @nozomi/ui",
-    "lint": "eslint .",
-    "format": "prettier --write ."
-  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^24.12.0",
-    "eslint": "^10.0.3",
+    "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-vue": "^10.8.0",
-    "globals": "^17.4.0",
-    "prettier": "^3.8.1",
-    "typescript": "~5.9.3",
-    "typescript-eslint": "^8.57.0"
+    "globals": "^17.6.0",
+    "jiti": "^2.7.0",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.3"
   }
 }
