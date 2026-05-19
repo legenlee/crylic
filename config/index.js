@@ -1,2 +1,2 @@
-export * as eslintConfig from "./eslint";
-export * as prettierConfig from "./prettier";
+export * as eslintConfig from "./eslint.js";
+export * as prettierConfig from "./prettier.js";
