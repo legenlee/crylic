@@ -2,8 +2,6 @@
 
 <template>
   <VApp>
-    <VMain>
-      <RouterView></RouterView>
-    </VMain>
+    <RouterView />
   </VApp>
 </template>
