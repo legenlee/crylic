@@ -13,25 +13,28 @@ import {
 <template>
   <VLayout>
     <VNavigationDrawer>
+      <template #prepend>
+        <VList>
+          <VListItem title="LegenLee" subtitle="Account Placeholder">
+            <template #prepend>
+              <VAvatar color="grey" />
+            </template>
+          </VListItem>
+        </VList>
+        <VDivider />
+
+        <VList nav>
+          <VListItem link prepend-icon="mdi-view-grid" title="Library" />
+          <VListItem link prepend-icon="mdi-cog" title="Settings" />
+        </VList>
+        <VDivider />
+      </template>
+
       <VList>
-        <VListItem title="LegenLee" subtitle="Microsoft (Active)">
-          <template #prepend>
-            <VAvatar color="grey" />
-          </template>
+        <VListItem v-for="value in 30" :key="value">
+          {{ value }}
         </VListItem>
       </VList>
-
-      <VDivider />
-
-      <VList nav>
-        <VListItem></VListItem>
-      </VList>
-
-      <template #append>
-        <VList nav>
-          <VListItem prepend-icon="mdi-cog" link title="Settings"></VListItem>
-        </VList>
-      </template>
     </VNavigationDrawer>
 
     <VMain>
