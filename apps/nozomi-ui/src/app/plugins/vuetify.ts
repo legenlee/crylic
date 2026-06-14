@@ -1,4 +1,5 @@
 // Vuetify
+import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
 
@@ -16,4 +17,8 @@ import "@fontsource/roboto/500-italic.css";
 import "@fontsource/roboto/700-italic.css";
 import "@fontsource/roboto/900-italic.css";
 
-export const vuetify = createVuetify();
+export const vuetify = createVuetify({
+  icons: {
+    defaultSet: "mdi",
+  },
+});
