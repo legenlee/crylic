@@ -1,8 +1,6 @@
 // Vuetify
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
-import * as components from "vuetify/components";
-import * as directives from "vuetify/directives";
 
 import "@fontsource/roboto/100.css";
 import "@fontsource/roboto/300.css";
@@ -18,7 +16,4 @@ import "@fontsource/roboto/500-italic.css";
 import "@fontsource/roboto/700-italic.css";
 import "@fontsource/roboto/900-italic.css";
 
-export const vuetify = createVuetify({
-  components,
-  directives,
-});
+export const vuetify = createVuetify();
