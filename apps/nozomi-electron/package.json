@@ -16,9 +16,9 @@
   "keywords": [],
   "devDependencies": {
     "@nozomi/config": "workspace:*",
-    "rolldown": "^1.0.1"
+    "rolldown": "^1.2.3"
   },
   "dependencies": {
-    "electron": "^42.1.0"
+    "electron": "^43.3.0"
   }
 }
