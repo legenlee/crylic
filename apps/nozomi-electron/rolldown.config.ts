@@ -6,5 +6,6 @@ export default defineConfig({
     file: "dist/index.js",
     format: "esm",
   },
+  platform: "node",
   external: ["electron"],
 });
