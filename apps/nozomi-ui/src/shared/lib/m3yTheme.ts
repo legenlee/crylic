@@ -23,56 +23,63 @@ const MD2_COLOR_TOKENS = [
   { name: "info", value: argbFromHex("#0b57d0"), blend: true },
 ] as const satisfies CustomColor[];
 
-// TODO: Rename object key of the createColorPalette and re-enable eslint.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const COLOR_TOKEN_KEYS = [
-  "primary",
-  "on-primary",
-  "primary-container",
-  "on-primary-container",
-  "secondary",
-  "on-secondary",
-  "secondary-container",
-  "on-secondary-container",
-  "tertiary",
-  "on-tertiary",
-  "tertiary-container",
-  "on-tertiary-container",
-  "error",
-  "on-error",
-  "error-container",
-  "on-error-container",
-  "background",
-  "on-background",
-  "surface",
-  "on-surface",
-  "surface-container-lowest",
-  "surface-container-low",
-  "surface-container",
-  "surface-container-high",
-  "surface-container-highest",
-  "surface-variant",
-  "on-surface-variant",
-  "surface-bright",
-  "surface-dim",
-  "surface-tint",
-  "inverse-surface",
-  "inverse-on-surface",
-  "outline",
-  "outline-variant",
-  "success",
-  "on-success",
-  "success-container",
-  "on-success-container",
-  "warning",
-  "on-warning",
-  "warning-container",
-  "on-warning-container",
-  "info",
-  "on-info",
-  "info-container",
-  "on-info-container",
-] as const;
+// Hardcoded with essential MD3 color token keys with some MD2 color token keys.
+// Idk this is best thing, someone please let me know better than this.
+type ColorTokenKeys =
+  | "primary"
+  | "on-primary"
+  | "primary-container"
+  | "on-primary-container"
+  | "secondary"
+  | "on-secondary"
+  | "secondary-container"
+  | "on-secondary-container"
+  | "tertiary"
+  | "on-tertiary"
+  | "tertiary-container"
+  | "on-tertiary-container"
+  | "error"
+  | "on-error"
+  | "error-container"
+  | "on-error-container"
+  | "background"
+  | "on-background"
+  | "surface"
+  | "on-surface"
+  | "surface-container-lowest"
+  | "on-surface-container-lowest"
+  | "surface-container-low"
+  | "on-surface-container-low"
+  | "surface-container"
+  | "on-surface-container"
+  | "surface-container-high"
+  | "on-surface-container-high"
+  | "surface-container-highest"
+  | "on-surface-container-highest"
+  | "surface-variant"
+  | "on-surface-variant"
+  | "surface-bright"
+  | "on-surface-bright"
+  | "surface-dim"
+  | "on-surface-dim"
+  | "surface-tint"
+  | "inverse-surface"
+  // Note: This is "inverse-on-surface" of the MD3 original token. Changed this key for Vuetify 4 auto mapping.
+  | "on-inverse-surface"
+  | "outline"
+  | "outline-variant"
+  | "success"
+  | "on-success"
+  | "success-container"
+  | "on-success-container"
+  | "warning"
+  | "on-warning"
+  | "warning-container"
+  | "on-warning-container"
+  | "info"
+  | "on-info"
+  | "info-container"
+  | "on-info-container";
 
 const dynamic = new MaterialDynamicColors();
 
@@ -103,7 +110,8 @@ function createColorPalette(
   scheme: DynamicScheme,
   customColors: CustomColorGroup[],
 ) {
-  // Hardcoded with essential MD3 color token keys with some MD2 color token keys.
+  const onSurface = getColor(dynamic.onSurface(), scheme);
+
   // Disabled prettier to prevent auto wrap. Wraping makes code agly.
   // prettier-ignore
   return {
@@ -131,22 +139,36 @@ function createColorPalette(
     "on-background": getColor(dynamic.onBackground(), scheme),
 
     surface: getColor(dynamic.surface(), scheme),
-    "on-surface": getColor(dynamic.onSurface(), scheme),
+    "on-surface": onSurface,
+
     "surface-container-lowest": getColor(dynamic.surfaceContainerLowest(), scheme),
+    "on-surface-container-lowest": onSurface,
+    
     "surface-container-low": getColor(dynamic.surfaceContainerLow(), scheme),
+    "on-surface-container-low": onSurface,
+    
     "surface-container": getColor(dynamic.surfaceContainer(), scheme),
+    "on-surface-container": onSurface,
+    
     "surface-container-high": getColor(dynamic.surfaceContainerHigh(), scheme),
+    "on-surface-container-high": onSurface,
+    
     "surface-container-highest": getColor(dynamic.surfaceContainerHighest(), scheme),
+    "on-surface-container-highest": onSurface,
 
     "surface-variant": getColor(dynamic.surfaceVariant(), scheme),
     "on-surface-variant": getColor(dynamic.onSurfaceVariant(), scheme),
 
     "surface-bright": getColor(dynamic.surfaceBright(), scheme),
+    "on-surface-bright": onSurface,
+
     "surface-dim": getColor(dynamic.surfaceDim(), scheme),
+    "on-surface-dim": onSurface,
+
     "surface-tint": getColor(dynamic.surfaceTint(), scheme),
 
     "inverse-surface": getColor(dynamic.inverseSurface(), scheme),
-    "inverse-on-surface": getColor(dynamic.inverseOnSurface(), scheme),
+    "on-inverse-surface": getColor(dynamic.inverseOnSurface(), scheme),
 
     outline: getColor(dynamic.outline(), scheme),
     "outline-variant": getColor(dynamic.outlineVariant(), scheme),
@@ -165,7 +187,7 @@ function createColorPalette(
     "on-info": getCustomColor("info", "onColor", scheme, customColors),
     "info-container": getCustomColor("info", "colorContainer", scheme, customColors),
     "on-info-container": getCustomColor("info", "onColorContainer", scheme, customColors),
-  } satisfies Record<typeof COLOR_TOKEN_KEYS[number], string>;
+  } satisfies Record<ColorTokenKeys, string>;
 }
 
 /**
