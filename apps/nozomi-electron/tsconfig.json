@@ -1,11 +1,13 @@
 {
   "include": [
     "src",
+    "plugins",
     "scripts",
     "env.d.ts",
     "eslint.config.ts",
     "prettier.config.ts",
-    "rolldown.config.ts"
+    "rolldown.config.ts",
+    "plugins"
   ],
   "compilerOptions": {
     "target": "es2023",

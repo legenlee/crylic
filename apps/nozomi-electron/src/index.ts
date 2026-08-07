@@ -15,10 +15,7 @@ function createWindow() {
   });
 
   if (app.isPackaged) {
-    /**
-     * @todo Write bundled entry html resolve path
-     */
-    // win.loadFile("index.html");
+    win.loadFile(path.resolve(import.meta.dirname, "./renderer/index.html"));
   } else {
     const url = process.env.VITE_DEV_SERVER_URL;
 
