@@ -1,6 +1,6 @@
 import path from "node:path";
 import fs from "node:fs/promises";
-import { defineConfig, RolldownPluginOption } from "rolldown";
+import { defineConfig, type RolldownPluginOption } from "rolldown";
 
 const copyRenderer: RolldownPluginOption = {
   name: "copy-renderer",
