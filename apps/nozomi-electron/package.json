@@ -10,7 +10,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "dev": "rolldown -c && node scripts/dev.ts",
+    "dev": "node scripts/dev.ts",
     "build": "rolldown -c",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint ."
