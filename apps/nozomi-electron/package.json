@@ -10,7 +10,6 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "electron:start": "electron .",
     "dev": "rolldown -c && node scripts/dev.ts",
     "build": "rolldown -c",
     "typecheck": "tsc -p tsconfig.json --noEmit",
