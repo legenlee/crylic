@@ -7,7 +7,7 @@ import prettier from "eslint-config-prettier";
 
 export default defineConfig(
   {
-    ignores: ["*.d.ts", "**/coverage", "**/dist"],
+    ignores: ["*.d.ts", "**/coverage/**", "**/dist/**"],
     extends: [eslintConfig.tsStrict, vue.configs["flat/recommended"]],
     files: ["**/*.{ts,vue}"],
     languageOptions: {
