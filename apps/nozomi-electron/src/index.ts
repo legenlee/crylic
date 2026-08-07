@@ -7,7 +7,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       preload: path.resolve(import.meta.dirname, "preload.cjs"),
-      // Set to constant value to prevent behaviour changing when electron has updated.
+      // Set to constant value to prevent behavior changing when electron has updated.
       contextIsolation: true,
       nodeIntegration: false,
       sandbox: true,

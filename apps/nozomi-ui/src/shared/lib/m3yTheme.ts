@@ -112,7 +112,7 @@ function createColorPalette(
 ) {
   const onSurface = getColor(dynamic.onSurface(), scheme);
 
-  // Disabled prettier to prevent auto wrap. Wraping makes code agly.
+  // Disabled prettier to prevent auto wrap. Wrapping makes code ugly.
   // prettier-ignore
   return {
     primary: getColor(dynamic.primary(), scheme),

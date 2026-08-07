@@ -17,7 +17,7 @@ await server.listen();
 server.printUrls();
 
 // Electron exports a command line, but I had to force casting as string, since electron documented default export as a namespaced api.
-// Yeah, I know this is agly.
+// Yeah, I know this is ugly.
 const child = spawn(electron as unknown as string, ["."], {
   cwd: path.resolve(import.meta.dirname, "../"),
   env: {
