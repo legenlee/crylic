@@ -5,21 +5,20 @@
   "description": "Shared linter, formatter config for nozomi packages.",
   "author": "LegenLee",
   "license": "Apache-2.0",
-  "packageManager": "pnpm@11.1.1+sha512.d1fdf5f73c617b64fa1a56a81c3c8dfe0e966e33a6010aa256b517ae77be21d93e05affc0de1a83b0e4f29d569f68b446ae8f068cd7247c0bb3df0fb4d7bdf9a",
   "repository": {
     "type": "git",
     "url": "https://github.com/legenlee/nozomi"
   },
   "type": "module",
   "devDependencies": {
-    "eslint": "^10.4.0",
-    "prettier": "^3.8.3",
-    "typescript-eslint": "^8.59.2"
+    "eslint": "^10.8.0",
+    "prettier": "^3.9.6",
+    "typescript-eslint": "^8.66.0"
   },
   "peerDependencies": {
-    "eslint": "^10.4.0",
-    "prettier": "^3.8.3",
-    "typescript-eslint": "^8.59.3"
+    "eslint": "^10.8.0",
+    "prettier": "^3.9.6",
+    "typescript-eslint": "^8.66.0"
   },
   "exports": {
     ".": "./index.js",
