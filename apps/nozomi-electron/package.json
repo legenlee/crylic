@@ -11,12 +11,18 @@
   "main": "dist/index.js",
   "scripts": {
     "electron:start": "electron .",
-    "build": "rolldown --config ./rolldown.config.ts"
+    "dev": "rolldown -c && node scripts/dev.ts",
+    "build": "rolldown -c",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint ."
   },
   "keywords": [],
   "devDependencies": {
     "@nozomi/config": "workspace:*",
-    "rolldown": "^1.2.3"
+    "@nozomi/ui": "workspace:*",
+    "jiti": "^2.7.0",
+    "rolldown": "^1.2.3",
+    "vite": "^8.2.0"
   },
   "dependencies": {
     "electron": "^43.3.0"

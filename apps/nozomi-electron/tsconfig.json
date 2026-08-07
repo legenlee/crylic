@@ -1,15 +1,18 @@
 {
   "include": [
     "src",
-    "rolldown.config.ts",
+    "scripts",
+    "env.d.ts",
     "eslint.config.ts",
-    "prettier.config.ts"
+    "prettier.config.ts",
+    "rolldown.config.ts"
   ],
   "compilerOptions": {
     "target": "es2023",
     "lib": ["ES2023"],
     "module": "esnext",
     "types": ["node"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strict": true
   }
 }
