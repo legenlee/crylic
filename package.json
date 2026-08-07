@@ -1,5 +1,6 @@
 {
   "name": "nozomi",
+  "private": true,
   "version": "1.0.0",
   "description": "A Minecraft Launcher",
   "author": "LegenLee",
