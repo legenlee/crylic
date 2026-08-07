@@ -24,6 +24,14 @@ const brandPalette = generatePaletteFromRGBA(BRAND_COLOR);
 
 export const vuetify = createVuetify({
   blueprint: md3,
+  defaults: {
+    VNavigationDrawer: { color: "surface-container-low" },
+    VList: { bgColor: "transparent" },
+    VAppBar: { color: "surface" },
+    VToolbar: { color: "surface" },
+    VCard: { color: "surface-container-low" },
+    VFooter: { color: "surface-container" },
+  },
   icons: {
     defaultSet: "mdi",
   },
