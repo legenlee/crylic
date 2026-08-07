@@ -4,11 +4,13 @@ import { createServer } from "vite";
 import electron from "electron";
 
 const env = { ...process.env };
+const RENDERER_ROOT = path.resolve(import.meta.dirname, "../../nozomi-ui");
 
 delete env.ELECTRON_RUN_AS_NODE;
 
+process.chdir(RENDERER_ROOT);
 const server = await createServer({
-  root: path.resolve(import.meta.dirname, "../../nozomi-ui"),
+  root: RENDERER_ROOT,
 });
 
 await server.listen();
