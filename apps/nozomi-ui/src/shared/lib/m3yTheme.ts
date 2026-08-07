@@ -5,13 +5,185 @@
 
 import {
   argbFromHex,
+  DynamicColor,
+  DynamicScheme,
+  Hct,
+  hexFromArgb,
+  MaterialDynamicColors,
+  SchemeTonalSpot,
   themeFromSourceColor,
+  type CustomColor,
+  type CustomColorGroup,
 } from "@material/material-color-utilities";
 
+// Useful MD2 color tokens.
+const MD2_COLOR_TOKENS = [
+  { name: "success", value: argbFromHex("#2e6c3f"), blend: true },
+  { name: "warning", value: argbFromHex("#7a5900"), blend: true },
+  { name: "info", value: argbFromHex("#0b57d0"), blend: true },
+] as const satisfies CustomColor[];
+
+// TODO: Rename object key of the createColorPalette and re-enable eslint.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const COLOR_TOKEN_KEYS = [
+  "primary",
+  "on-primary",
+  "primary-container",
+  "on-primary-container",
+  "secondary",
+  "on-secondary",
+  "secondary-container",
+  "on-secondary-container",
+  "tertiary",
+  "on-tertiary",
+  "tertiary-container",
+  "on-tertiary-container",
+  "error",
+  "on-error",
+  "error-container",
+  "on-error-container",
+  "background",
+  "on-background",
+  "surface",
+  "on-surface",
+  "surface-container-lowest",
+  "surface-container-low",
+  "surface-container",
+  "surface-container-high",
+  "surface-container-highest",
+  "surface-variant",
+  "on-surface-variant",
+  "surface-bright",
+  "surface-dim",
+  "surface-tint",
+  "inverse-surface",
+  "inverse-on-surface",
+  "outline",
+  "outline-variant",
+  "success",
+  "on-success",
+  "success-container",
+  "on-success-container",
+  "warning",
+  "on-warning",
+  "warning-container",
+  "on-warning-container",
+  "info",
+  "on-info",
+  "info-container",
+  "on-info-container",
+] as const;
+
+const dynamic = new MaterialDynamicColors();
+
+function getColor(color: DynamicColor, scheme: DynamicScheme) {
+  return hexFromArgb(color.getArgb(scheme));
+}
+
+function getCustomColor(
+  name: (typeof MD2_COLOR_TOKENS)[number]["name"],
+  role: "color" | "onColor" | "colorContainer" | "onColorContainer",
+  scheme: DynamicScheme,
+  customColors: CustomColorGroup[],
+) {
+  const group = customColors.find(
+    (customColor) => customColor.color.name === name,
+  );
+
+  if (!group) {
+    throw new Error(
+      `Expected existing name from MD2_COLOR_TOKENS, but provided name: ${name}`,
+    );
+  }
+
+  return hexFromArgb((scheme.isDark ? group.dark : group.light)[role]);
+}
+
+function createColorPalette(
+  scheme: DynamicScheme,
+  customColors: CustomColorGroup[],
+) {
+  // Hardcoded with essential MD3 color token keys with some MD2 color token keys.
+  // Disabled prettier to prevent auto wrap. Wraping makes code agly.
+  // prettier-ignore
+  return {
+    primary: getColor(dynamic.primary(), scheme),
+    "on-primary": getColor(dynamic.onPrimary(), scheme),
+    "primary-container": getColor(dynamic.primaryContainer(), scheme),
+    "on-primary-container": getColor(dynamic.onPrimaryContainer(), scheme),
+
+    secondary: getColor(dynamic.secondary(), scheme),
+    "on-secondary": getColor(dynamic.onSecondary(), scheme),
+    "secondary-container": getColor(dynamic.secondaryContainer(), scheme),
+    "on-secondary-container": getColor(dynamic.onSecondaryContainer(), scheme),
+
+    tertiary: getColor(dynamic.tertiary(), scheme),
+    "on-tertiary": getColor(dynamic.onTertiary(), scheme),
+    "tertiary-container": getColor(dynamic.tertiaryContainer(), scheme),
+    "on-tertiary-container": getColor(dynamic.onTertiaryContainer(), scheme),
+
+    error: getColor(dynamic.error(), scheme),
+    "on-error": getColor(dynamic.onError(), scheme),
+    "error-container": getColor(dynamic.errorContainer(), scheme),
+    "on-error-container": getColor(dynamic.onErrorContainer(), scheme),
+
+    background: getColor(dynamic.background(), scheme),
+    "on-background": getColor(dynamic.onBackground(), scheme),
+
+    surface: getColor(dynamic.surface(), scheme),
+    "on-surface": getColor(dynamic.onSurface(), scheme),
+    "surface-container-lowest": getColor(dynamic.surfaceContainerLowest(), scheme),
+    "surface-container-low": getColor(dynamic.surfaceContainerLow(), scheme),
+    "surface-container": getColor(dynamic.surfaceContainer(), scheme),
+    "surface-container-high": getColor(dynamic.surfaceContainerHigh(), scheme),
+    "surface-container-highest": getColor(dynamic.surfaceContainerHighest(), scheme),
+
+    "surface-variant": getColor(dynamic.surfaceVariant(), scheme),
+    "on-surface-variant": getColor(dynamic.onSurfaceVariant(), scheme),
+
+    "surface-bright": getColor(dynamic.surfaceBright(), scheme),
+    "surface-dim": getColor(dynamic.surfaceDim(), scheme),
+    "surface-tint": getColor(dynamic.surfaceTint(), scheme),
+
+    "inverse-surface": getColor(dynamic.inverseSurface(), scheme),
+    "inverse-on-surface": getColor(dynamic.inverseOnSurface(), scheme),
+
+    outline: getColor(dynamic.outline(), scheme),
+    "outline-variant": getColor(dynamic.outlineVariant(), scheme),
+
+    success: getCustomColor("success", "color", scheme, customColors),
+    "on-success": getCustomColor("success", "onColor", scheme, customColors),
+    "success-container": getCustomColor("success", "colorContainer", scheme, customColors),
+    "on-success-container": getCustomColor("success", "onColorContainer", scheme, customColors),
+
+    warning: getCustomColor("warning", "color", scheme, customColors),
+    "on-warning": getCustomColor("warning", "onColor", scheme, customColors),
+    "warning-container": getCustomColor("warning", "colorContainer", scheme, customColors),
+    "on-warning-container": getCustomColor("warning", "onColorContainer", scheme, customColors),
+
+    info: getCustomColor("info", "color", scheme, customColors),
+    "on-info": getCustomColor("info", "onColor", scheme, customColors),
+    "info-container": getCustomColor("info", "colorContainer", scheme, customColors),
+    "on-info-container": getCustomColor("info", "onColorContainer", scheme, customColors),
+  } satisfies Record<typeof COLOR_TOKEN_KEYS[number], string>;
+}
+
 /**
- * Generates color theme from the rgba color string.
+ * Generate and returns color theme from the rgba color string.
  * @param rgba Hex string of the rgba color
  */
-export function generateThemeFromRGBA(rgba: string) {
-  return themeFromSourceColor(argbFromHex(rgba));
+export function generatePaletteFromRGBA(rgba: string) {
+  const seed = argbFromHex(rgba);
+  const customColors = themeFromSourceColor(
+    seed,
+    MD2_COLOR_TOKENS,
+  ).customColors;
+
+  const lightScheme = new SchemeTonalSpot(Hct.fromInt(seed), false, 0);
+  const darkScheme = new SchemeTonalSpot(Hct.fromInt(seed), true, 0);
+
+  return {
+    light: createColorPalette(lightScheme, customColors),
+    dark: createColorPalette(darkScheme, customColors),
+  };
 }
