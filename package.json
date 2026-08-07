@@ -20,6 +20,7 @@
     "electron": "pnpm --filter @nozomi/electron",
     "ui": "pnpm --filter @nozomi/ui",
     "lint": "pnpm -r lint",
+    "format": "pnpm -r format",
     "typecheck": "pnpm -r typecheck",
     "build": "pnpm -r build"
   }
