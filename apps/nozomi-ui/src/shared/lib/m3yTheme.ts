@@ -191,11 +191,19 @@ function createColorPalette(
 }
 
 /**
- * Generate and returns color theme from the rgba color string.
- * @param rgba Hex string of the rgba color
+ * Generate and returns color theme from the rgb color string.
+ * @param rgb Hex string of the rgb color. ex: #a254c1, #a6c
  */
-export function generatePaletteFromRGBA(rgba: string) {
-  const seed = argbFromHex(rgba);
+export function generatePaletteFromRGB(rgb: string) {
+  if (!rgb.startsWith("#")) {
+    throw new Error("Hex color string must be started with # character.");
+  } else if (rgb.length !== 4 && rgb.length !== 7) {
+    throw new Error(
+      "Hex color string must be 4 or 7 characters. No alpha supports.",
+    );
+  }
+
+  const seed = argbFromHex(rgb);
   const customColors = themeFromSourceColor(
     seed,
     MD2_COLOR_TOKENS,
