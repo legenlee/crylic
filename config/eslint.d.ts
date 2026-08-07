@@ -1,5 +1,5 @@
-import type { Config } from "eslint/config";
+import type { ConfigObject } from "eslint/config";
 
-export declare const jsRecommended: Config;
-export declare const tsRecommended: Config;
-export declare const tsStrict: Config;
+export declare const jsRecommended: ConfigObject[];
+export declare const tsRecommended: ConfigObject[];
+export declare const tsStrict: ConfigObject[];

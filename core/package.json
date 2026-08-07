@@ -1,0 +1,32 @@
+{
+  "name": "@nozomi/core",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Core source of the Nozomi.",
+  "author": "LegenLee",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/legenlee/nozomi"
+  },
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier -w .",
+    "typecheck": "tsc -p tsconfig.json -noEmit"
+  },
+  "devDependencies": {
+    "@nozomi/config": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "globals": "catalog:",
+    "jiti": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:"
+  }
+}

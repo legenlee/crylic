@@ -1,0 +1,11 @@
+{
+  "include": ["src", "eslint.config.ts", "prettier.config.ts"],
+  "compilerOptions": {
+    "target": "es2023",
+    "lib": ["ES2023"],
+    "module": "esnext",
+    "types": ["node"],
+    "skipLibCheck": true,
+    "strict": true
+  }
+}
