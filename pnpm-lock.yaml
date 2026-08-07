@@ -203,37 +203,39 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    '@types/node':
+      specifier: ^24.12.0
+      version: 24.12.0
+    eslint:
+      specifier: ^10.8.0
+      version: 10.8.0
+    eslint-config-prettier:
+      specifier: ^10.1.8
+      version: 10.1.8
+    globals:
+      specifier: ^17.9.0
+      version: 17.9.0
+    jiti:
+      specifier: ^2.7.0
+      version: 2.7.0
+    prettier:
+      specifier: ^3.9.6
+      version: 3.9.6
+    typescript:
+      specifier: ^6.0.3
+      version: 6.0.3
+    typescript-eslint:
+      specifier: ^8.66.0
+      version: 8.66.0
+    vite:
+      specifier: ^8.2.0
+      version: 8.2.0
+
 importers:
 
-  .:
-    devDependencies:
-      '@eslint/js':
-        specifier: ^10.0.1
-        version: 10.0.1(eslint@10.8.0(jiti@2.7.0))
-      '@types/node':
-        specifier: ^24.12.0
-        version: 24.12.0
-      eslint:
-        specifier: ^10.8.0
-        version: 10.8.0(jiti@2.7.0)
-      eslint-config-prettier:
-        specifier: ^10.1.8
-        version: 10.1.8(eslint@10.8.0(jiti@2.7.0))
-      globals:
-        specifier: ^17.9.0
-        version: 17.9.0
-      jiti:
-        specifier: ^2.7.0
-        version: 2.7.0
-      prettier:
-        specifier: ^3.9.6
-        version: 3.9.6
-      typescript:
-        specifier: ^6.0.3
-        version: 6.0.3
-      typescript-eslint:
-        specifier: ^8.66.0
-        version: 8.66.0(eslint@10.8.0(jiti@2.7.0))(typescript@6.0.3)
+  .: {}
 
   apps/nozomi-electron:
     dependencies:
@@ -247,14 +249,35 @@ importers:
       '@nozomi/ui':
         specifier: workspace:*
         version: link:../nozomi-ui
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.12.0
+      eslint:
+        specifier: 'catalog:'
+        version: 10.8.0(jiti@2.7.0)
+      eslint-config-prettier:
+        specifier: 'catalog:'
+        version: 10.1.8(eslint@10.8.0(jiti@2.7.0))
+      globals:
+        specifier: 'catalog:'
+        version: 17.9.0
       jiti:
-        specifier: ^2.7.0
+        specifier: 'catalog:'
         version: 2.7.0
+      prettier:
+        specifier: 'catalog:'
+        version: 3.9.6
       rolldown:
         specifier: ^1.2.3
         version: 1.2.3
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      typescript-eslint:
+        specifier: 'catalog:'
+        version: 8.66.0(eslint@10.8.0(jiti@2.7.0))(typescript@6.0.3)
       vite:
-        specifier: ^8.2.0
+        specifier: 'catalog:'
         version: 8.2.0(@types/node@24.12.0)(jiti@2.7.0)(yaml@2.9.0)
 
   apps/nozomi-ui:
@@ -281,17 +304,41 @@ importers:
       '@nozomi/config':
         specifier: workspace:*
         version: link:../../config
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.12.0
       '@vitejs/plugin-vue':
         specifier: ^6.0.8
         version: 6.0.8(vite@8.2.0(@types/node@24.12.0)(jiti@2.7.0)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
       '@vue/tsconfig':
         specifier: ^0.9.1
         version: 0.9.1(typescript@6.0.3)(vue@3.5.41(typescript@6.0.3))
+      eslint:
+        specifier: 'catalog:'
+        version: 10.8.0(jiti@2.7.0)
+      eslint-config-prettier:
+        specifier: 'catalog:'
+        version: 10.1.8(eslint@10.8.0(jiti@2.7.0))
       eslint-plugin-vue:
         specifier: ^10.10.0
         version: 10.10.0(@typescript-eslint/parser@8.66.0(eslint@10.8.0(jiti@2.7.0))(typescript@6.0.3))(eslint@10.8.0(jiti@2.7.0))(vue-eslint-parser@10.4.0(eslint@10.8.0(jiti@2.7.0)))
+      globals:
+        specifier: 'catalog:'
+        version: 17.9.0
+      jiti:
+        specifier: 'catalog:'
+        version: 2.7.0
+      prettier:
+        specifier: 'catalog:'
+        version: 3.9.6
+      typescript:
+        specifier: 'catalog:'
+        version: 6.0.3
+      typescript-eslint:
+        specifier: 'catalog:'
+        version: 8.66.0(eslint@10.8.0(jiti@2.7.0))(typescript@6.0.3)
       vite:
-        specifier: ^8.2.0
+        specifier: 'catalog:'
         version: 8.2.0(@types/node@24.12.0)(jiti@2.7.0)(yaml@2.9.0)
       vue-tsc:
         specifier: ^3.3.9
@@ -299,14 +346,17 @@ importers:
 
   config:
     devDependencies:
+      '@eslint/js':
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@10.8.0(jiti@2.7.0))
       eslint:
-        specifier: ^10.8.0
+        specifier: 'catalog:'
         version: 10.8.0(jiti@2.7.0)
       prettier:
-        specifier: ^3.9.6
+        specifier: 'catalog:'
         version: 3.9.6
       typescript-eslint:
-        specifier: ^8.66.0
+        specifier: 'catalog:'
         version: 8.66.0(eslint@10.8.0(jiti@2.7.0))(typescript@6.0.3)
 
 packages:

@@ -20,9 +20,16 @@
   "devDependencies": {
     "@nozomi/config": "workspace:*",
     "@nozomi/ui": "workspace:*",
-    "jiti": "^2.7.0",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-prettier": "catalog:",
+    "globals": "catalog:",
+    "jiti": "catalog:",
+    "prettier": "catalog:",
     "rolldown": "^1.2.3",
-    "vite": "^8.2.0"
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vite": "catalog:"
   },
   "dependencies": {
     "electron": "^43.3.0"

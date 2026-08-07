@@ -26,10 +26,18 @@
   },
   "devDependencies": {
     "@nozomi/config": "workspace:*",
+    "@types/node": "catalog:",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vue/tsconfig": "^0.9.1",
+    "globals": "catalog:",
+    "jiti": "catalog:",
+    "eslint": "catalog:",
     "eslint-plugin-vue": "^10.10.0",
-    "vite": "^8.2.0",
+    "eslint-config-prettier": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "typescript-eslint": "catalog:",
+    "vite": "catalog:",
     "vue-tsc": "^3.3.9"
   }
 }
