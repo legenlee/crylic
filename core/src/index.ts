@@ -3,5 +3,3 @@
  */
 
 export const ping = "pong";
-
-enum UnusedEnum {}
