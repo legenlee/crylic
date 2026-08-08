@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vuetify from "vite-plugin-vuetify";
 
-function resolveFromRoot(target: string) {
+function resolveFromProject(target: string) {
   return path.resolve(import.meta.dirname, target);
 }
 
@@ -15,13 +15,18 @@ export default defineConfig({
       // Prefer explicit import. This can reduce more bundle size.
       autoImport: false,
       styles: {
-        configFile: resolveFromRoot("./src/app/styles/settings.scss"),
+        configFile: resolveFromProject("./src/app/styles/settings.scss"),
       },
     }),
   ],
   resolve: {
     alias: {
-      "@": resolveFromRoot("./src"),
+      "@": resolveFromProject("./src"),
     },
+  },
+  build: {
+    emptyOutDir: true,
+    // Places bundle to main package dist directory
+    outDir: resolveFromProject("../nozomi-main/dist/renderer"),
   },
 });
