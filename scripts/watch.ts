@@ -70,6 +70,14 @@ const watcher = watch(mainConfig.map((entry) => ({ ...entry, cwd: mainPath })));
 
 watcher.on("event", async (event) => {
   switch (event.code) {
+    case "START": {
+      if (watcherStatus !== "init") {
+        watcherStatus = "normal";
+      }
+
+      break;
+    }
+
     case "BUNDLE_END": {
       await event.result.close();
       break;
