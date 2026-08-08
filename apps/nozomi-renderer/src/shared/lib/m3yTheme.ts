@@ -1,8 +1,3 @@
-/**
- * @file Generates Material 3 You theme.
- * @author LegenLee <lsko1332@naver.com>
- */
-
 import {
   argbFromHex,
   DynamicColor,
