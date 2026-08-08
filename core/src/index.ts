@@ -2,4 +2,6 @@
  * @todo: Write public export api
  */
 
-export const ping: number = "pong";
+export const ping = "pong";
+
+enum UnusedEnum {}
