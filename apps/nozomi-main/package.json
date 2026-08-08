@@ -1,5 +1,5 @@
 {
-  "name": "@nozomi/electron",
+  "name": "@nozomi/main",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -20,8 +20,8 @@
   "devDependencies": {
     "@nozomi/config": "workspace:*",
     "@nozomi/core": "workspace:*",
-    "@nozomi/ui": "workspace:*",
     "@types/node": "catalog:",
+    "electron": "catalog:",
     "eslint": "catalog:",
     "eslint-config-prettier": "catalog:",
     "globals": "catalog:",
@@ -31,8 +31,5 @@
     "typescript": "catalog:",
     "typescript-eslint": "catalog:",
     "vite": "catalog:"
-  },
-  "dependencies": {
-    "electron": "^43.3.0"
   }
 }

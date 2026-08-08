@@ -1,6 +1,6 @@
 packages:
-  - "apps/nozomi-electron"
-  - "apps/nozomi-ui"
+  - "apps/nozomi-main"
+  - "apps/nozomi-renderer"
   - "config"
   - "core"
 
