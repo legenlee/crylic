@@ -2,4 +2,4 @@
  * @todo: Write public export api
  */
 
-export const ping = "pong";
+export const ping: number = "pong";
