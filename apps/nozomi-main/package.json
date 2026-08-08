@@ -21,7 +21,7 @@
     "@nozomi/config": "workspace:*",
     "@nozomi/core": "workspace:*",
     "@types/node": "catalog:",
-    "electron": "catalog:",
+    "electron": "^43.3.0",
     "eslint": "catalog:",
     "eslint-config-prettier": "catalog:",
     "globals": "catalog:",

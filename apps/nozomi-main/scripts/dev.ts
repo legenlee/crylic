@@ -3,17 +3,18 @@ import path from "node:path";
 import { createServer } from "vite";
 import { watch } from "rolldown";
 import electron from "electron";
-import mainConfig from "../apps/nozomi-main/rolldown.config.ts";
+// @ts-expect-error Disabled extension check since Node.js cannot resolve file without extension.
+import mainConfig from "../rolldown.config.ts";
 
-const mainPath = path.resolve(import.meta.dirname, "../apps/nozomi-main");
-// Disables prettier for preventing wrapping
+const mainPath = path.resolve(import.meta.dirname, "../");
+// Disables prettier for prevent wrapping
 // prettier-ignore
-const rendererPath = path.resolve(import.meta.dirname, "../apps/nozomi-renderer");
+const rendererPath = path.resolve(import.meta.dirname, "../../nozomi-renderer");
 
 let child: ChildProcess | null = null;
 let watcherStatus: "init" | "normal" | "error" | "restart" = "init";
 
-// Start the renderer vite dev server;
+// Start the renderer vite dev server
 process.chdir(rendererPath);
 const rendererServer = await createServer({
   root: rendererPath,

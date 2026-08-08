@@ -17,19 +17,10 @@
   },
   "type": "module",
   "scripts": {
-    "electron": "pnpm --filter @nozomi/electron",
-    "ui": "pnpm --filter @nozomi/ui",
+    "main": "pnpm --filter @nozomi/main",
+    "renderer": "pnpm --filter @nozomi/renderer",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",
-    "typecheck": "pnpm -r typecheck",
-    "watch": "node scripts/watch.ts",
-    "build": "pnpm -r build"
-  },
-  "devDependencies": {
-    "@types/node": "catalog:",
-    "electron": "catalog:",
-    "jiti": "catalog:",
-    "rolldown": "catalog:",
-    "vite": "catalog:"
+    "typecheck": "pnpm -r typecheck"
   }
 }
