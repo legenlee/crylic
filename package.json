@@ -5,6 +5,9 @@
   "description": "A Minecraft Launcher",
   "author": "LegenLee",
   "license": "Apache-2.0",
+  "engines": {
+    "node": ">=24.18.0"
+  },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",

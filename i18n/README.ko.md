@@ -7,7 +7,7 @@ Nozomi은 마인크래프트 커스텀 런처입니다.
 
 ### 개발 환경 세팅
 
-[Node.js](https://nodejs.org) v24.11에서 구동 및 빌드가 가능하며 에디터로 [Visual Studio Code](https://code.visualstudio.com/)를 권장합니다.  
+[Node.js](https://nodejs.org) v24.18 이상에서 구동 및 빌드가 가능하며 에디터로 [Visual Studio Code](https://code.visualstudio.com/)를 권장합니다.  
 패키지 매니저는 PNPM을 사용합니다.
 
 ### Visual Studio Code 필수 확장 프로그램

@@ -6,7 +6,7 @@ Nozomi is a custom Minecraft launcher.
 
 ### Development setup
 
-- [Node.js](https://nodejs.org) v24.11 (Runtime)
+- [Node.js](https://nodejs.org) v24.18 or upper (Runtime)
 - [Visual Studio Code](https://code.visualstudio.com/) (Editor)
 - pnpm (Package manager)
 
