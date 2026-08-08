@@ -19,6 +19,7 @@
   "scripts": {
     "main": "pnpm --filter @nozomi/main",
     "renderer": "pnpm --filter @nozomi/renderer",
+    "build": "pnpm --filter @nozomi/renderer build && pnpm --filter @nozomi/main build",
     "lint": "eslint .",
     "format": "prettier -w .",
     "typecheck": "pnpm -r typecheck"
