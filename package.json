@@ -22,6 +22,7 @@
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",
     "typecheck": "pnpm -r typecheck",
+    "watch": "node scripts/watch.ts",
     "build": "pnpm -r build"
   },
   "devDependencies": {
