@@ -20,6 +20,7 @@
     "main": "pnpm --filter @nozomi/main",
     "renderer": "pnpm --filter @nozomi/renderer",
     "build": "pnpm --filter @nozomi/renderer build && pnpm --filter @nozomi/main build",
+    "package": "pnpm run build && pnpm --filter @nozomi/main package",
     "lint": "eslint .",
     "format": "prettier -w .",
     "typecheck": "pnpm -r typecheck"

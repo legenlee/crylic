@@ -1,6 +1,7 @@
 {
   "name": "@nozomi/main",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "description": "A cross-platform Minecraft Launcher",
   "private": true,
   "type": "module",
   "author": "LegenLee",
@@ -12,6 +13,7 @@
   "scripts": {
     "dev": "node scripts/dev.ts",
     "build": "rolldown -c",
+    "package": "electron-builder",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "keywords": [],

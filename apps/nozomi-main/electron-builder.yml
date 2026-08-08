@@ -1,0 +1,10 @@
+appId: "io.legenlee.nozomi"
+productName: "Nozomi"
+executableName: "nozomi"
+files:
+  - "./dist/**/*"
+directories:
+  output: "./output"
+linux:
+  target:
+    - dir
