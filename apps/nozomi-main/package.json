@@ -12,24 +12,15 @@
   "scripts": {
     "dev": "node scripts/dev.ts",
     "build": "rolldown -c",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "eslint .",
-    "format": "prettier -w ."
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "keywords": [],
   "devDependencies": {
-    "@nozomi/config": "workspace:*",
     "@nozomi/core": "workspace:*",
     "@types/node": "catalog:",
     "electron": "^43.3.0",
-    "eslint": "catalog:",
-    "eslint-config-prettier": "catalog:",
-    "globals": "catalog:",
-    "jiti": "catalog:",
-    "prettier": "catalog:",
     "rolldown": "^1.2.3",
     "typescript": "catalog:",
-    "typescript-eslint": "catalog:",
     "vite": "catalog:"
   }
 }

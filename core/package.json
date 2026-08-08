@@ -14,19 +14,10 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "lint": "eslint .",
-    "format": "prettier -w .",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@nozomi/config": "workspace:*",
     "@types/node": "catalog:",
-    "eslint": "catalog:",
-    "eslint-config-prettier": "catalog:",
-    "globals": "catalog:",
-    "jiti": "catalog:",
-    "prettier": "catalog:",
-    "typescript": "catalog:",
-    "typescript-eslint": "catalog:"
+    "typescript": "catalog:"
   }
 }
