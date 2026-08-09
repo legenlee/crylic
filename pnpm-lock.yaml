@@ -343,6 +343,9 @@ importers:
       '@nozomi/core':
         specifier: workspace:*
         version: link:../../core
+      '@nozomi/main':
+        specifier: workspace:*
+        version: link:../nozomi-main
       '@types/node':
         specifier: 'catalog:'
         version: 24.12.0

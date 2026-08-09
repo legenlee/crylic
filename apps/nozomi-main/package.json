@@ -16,6 +16,9 @@
     "package": "electron-builder",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
+  "exports": {
+    "./api": "./src/api.ts"
+  },
   "keywords": [],
   "devDependencies": {
     "@nozomi/core": "workspace:*",
